@@ -3,440 +3,1947 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tägliche Arbeits-Checkliste</title>
+    <title>gardenKeeper® DATEV-Kontenplan - Vollständige Übersicht</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
+        :root {
+            /* gardenKeeper Farben in Pastell */
+            --garden-primary: #c7e9c0;
+            --garden-secondary: #d4e8c4;
+            --garden-accent: #e8d5b7;
+            --pastel-pink: #ffd1dc;
+            --pastel-blue: #b5d3e7;
+            --pastel-green: #c7e9c0;
+            --pastel-yellow: #fff5ba;
+            --pastel-purple: #e0c3fc;
+            --pastel-peach: #ffe5cc;
+            --pastel-mint: #c5f0e3;
+            --text-dark: #4a5f3a;
+            --text-light: #7a8f6a;
+            --white: #ffffff;
+            --border-color: #e0d5e7;
+            --hover-bg: #f5f0fa;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #c7e9c0 0%, #fff5ba 50%, #b5d3e7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
         .container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
+
+        header {
+            background: linear-gradient(135deg, var(--garden-primary) 0%, var(--pastel-blue) 100%);
+            color: var(--text-dark);
+            padding: 40px;
             text-align: center;
+            position: relative;
         }
-        .date-section {
-            background: #f8f9fa;
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logo-text {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--pastel-mint) 0%, var(--pastel-green) 100%);
             padding: 15px;
-            border-bottom: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .filter-section {
+            background: var(--pastel-yellow);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 12px 20px;
+            border: 2px solid var(--garden-primary);
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--garden-secondary);
+            box-shadow: 0 0 0 3px rgba(199, 233, 192, 0.3);
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            border: 2px solid var(--garden-primary);
+            border-radius: 25px;
+            font-size: 16px;
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .klasse-section {
+            margin-bottom: 40px;
+        }
+
+        .klasse-header {
+            background: linear-gradient(135deg, var(--pastel-purple) 0%, var(--pastel-blue) 100%);
+            color: var(--text-dark);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
         }
-        .time-block {
-            margin: 0;
-            border-bottom: 1px solid #e9ecef;
+
+        .klasse-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .time-header {
-            background: #4a5568;
-            color: white;
-            padding: 12px 20px;
+
+        .klasse-title {
+            font-size: 1.4rem;
             font-weight: bold;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
-        .task-table {
-            width: 100%;
-            border-collapse: collapse;
+
+        .klasse-badge {
+            background: rgba(255,255,255,0.5);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
-        .task-row {
-            border-bottom: 1px solid #e2e8f0;
+
+        .konten-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
         }
-        .task-row:hover {
-            background-color: #f7fafc;
+
+        .klasse-section.active .konten-grid {
+            max-height: 5000px;
         }
-        .task-cell {
-            padding: 12px 15px;
-            border-right: 1px solid #e2e8f0;
-            vertical-align: top;
-        }
-        .task-cell:last-child {
-            border-right: none;
-        }
-        .checkbox {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        .task-description {
-            font-weight: 500;
-            color: #2d3748;
-        }
-        .task-details {
-            font-size: 0.9em;
-            color: #718096;
-            margin-top: 4px;
-        }
-        .priority-high {
-            border-left: 4px solid #e53e3e;
-        }
-        .priority-medium {
-            border-left: 4px solid #ed8936;
-        }
-        .priority-low {
-            border-left: 4px solid #38a169;
-        }
-        .completed {
-            background-color: #f0fff4;
-            text-decoration: line-through;
-            opacity: 0.7;
-        }
-        .notes-input {
-            width: 100%;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
-            padding: 6px 8px;
-            font-size: 0.9em;
-            resize: vertical;
-            min-height: 30px;
-        }
-        .add-task-btn {
-            background: #4299e1;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin: 10px 0;
-        }
-        .add-task-btn:hover {
-            background: #3182ce;
-        }
-        .export-btn {
-            background: #38a169;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-        }
-        .export-btn:hover {
-            background: #2f855a;
-        }
-        .footer-stats {
-            background: #f8f9fa;
-            padding: 15px 20px;
+
+        .konto-card {
+            background: var(--white);
+            border: 2px solid var(--pastel-green);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
             display: flex;
-            justify-content: space-between;
-            font-size: 0.9em;
-            color: #6c757d;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .konto-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--garden-primary);
+            background: var(--pastel-peach);
+        }
+
+        .konto-nummer {
+            background: var(--garden-primary);
+            color: var(--text-dark);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .konto-info {
+            flex: 1;
+        }
+
+        .konto-bezeichnung {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .klasse-section.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--garden-primary) 0%, var(--pastel-green) 100%);
+            color: var(--text-dark);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--pastel-yellow) 0%, var(--pastel-peach) 100%);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, var(--pastel-mint) 0%, var(--pastel-green) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid var(--garden-primary);
+        }
+
+        .info-box h3 {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .konten-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-section {
+                flex-direction: column;
+            }
+            
+            .filter-input {
+                min-width: 100%;
+            }
+        }
+
+        .highlight {
+            background: var(--pastel-yellow);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Special badges */
+        .badge-gwg {
+            background: var(--pastel-pink);
+            color: var(--text-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+
+        .quick-stats {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>📋 Tägliche Arbeits-Checkliste</h1>
-            <p>Strukturiert durch den Tag - Schritt für Schritt</p>
-        </div>
-        
-        <div class="date-section">
-            <div>
-                <strong>Datum:</strong> <input type="date" id="currentDate" style="padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
-            </div>
-            <div>
-                <button class="export-btn" onclick="exportTasks()">📤 Als Text exportieren</button>
-                <button class="export-btn" onclick="resetDay()">🔄 Tag zurücksetzen</button>
-            </div>
-        </div>
+        <header>
+            <h1>🌱 gardenKeeper® DATEV-Kontenplan</h1>
+            <div class="logo-text">"Weil Ihr Zuhause es verdient - made by gardenKeeper®"</div>
+        </header>
 
-        <!-- 6:45 - 8:30 Früh -->
-        <div class="time-block">
-            <div class="time-header">
-                <span>🌅 6:45 - 8:30 Uhr: Operative Unterstützung & Abnahmen</span>
-                <span id="progress-early">0/3</span>
+        <div class="content">
+            <div class="info-box">
+                <h3>📊 Ihr vollständiger DATEV-Kontenrahmen</h3>
+                <p>Komplette Übersicht aller <span class="highlight">146 Sachkonten</span> Ihrer gardenKeeper® GmbH Buchhaltung.</p>
             </div>
-            <table class="task-table">
-                <tr class="task-row priority-high" data-time="early">
-                    <td class="task-cell" style="width: 40px;"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell" style="width: 300px;">
-                        <div class="task-description">Team draußen unterstützen</div>
-                        <div class="task-details">Handschuhe, Material, kurze Abstimmung</div>
-                    </td>
-                    <td class="task-cell" style="width: 100px;">30 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Notizen, Besonderheiten..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-high" data-time="early">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Abnahmen vom Vortag prüfen</div>
-                        <div class="task-details">Erst wenn alles geklärt ist → weiter!</div>
-                    </td>
-                    <td class="task-cell">45 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Unklarheiten, Rückfragen..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-medium" data-time="early">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Abstimmung mit Teamleiter</div>
-                        <div class="task-details">Offene Punkte klären</div>
-                    </td>
-                    <td class="task-cell">30 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Gesprächsnotizen..."></textarea></td>
-                </tr>
-            </table>
-            <button class="add-task-btn" onclick="addTask('early')">+ Aufgabe hinzufügen</button>
-        </div>
 
-        <!-- 8:30 - 10:30 Morgen -->
-        <div class="time-block">
-            <div class="time-header">
-                <span>📧 8:30 - 10:30 Uhr: Kommunikation & Buchhaltung</span>
-                <span id="progress-morning">0/2</span>
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <div class="stat-number">146</div>
+                    <div class="stat-label">Konten gesamt</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">Anlagevermögen</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Umlaufvermögen</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">43</div>
+                    <div class="stat-label">Verbindlichkeiten</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">Erlöskonten</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">45</div>
+                    <div class="stat-label">Aufwendungen</div>
+                </div>
             </div>
-            <table class="task-table">
-                <tr class="task-row priority-high" data-time="morning">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Kunden-E-Mails bearbeiten</div>
-                        <div class="task-details">Dringende zuerst, Rechnungen identifizieren</div>
-                    </td>
-                    <td class="task-cell">60 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Wichtige E-Mails notieren..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-medium" data-time="morning">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Eingangsrechnungen scannen & weiterleiten</div>
-                        <div class="task-details">An spezielle E-Mail-Adresse senden</div>
-                    </td>
-                    <td class="task-cell">60 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Anzahl Rechnungen, Besonderheiten..."></textarea></td>
-                </tr>
-            </table>
-            <button class="add-task-btn" onclick="addTask('morning')">+ Aufgabe hinzufügen</button>
-        </div>
 
-        <!-- 10:30 - 12:30 Vormittag -->
-        <div class="time-block">
-            <div class="time-header">
-                <span>💰 10:30 - 12:30 Uhr: Lohnthemen & Lexware</span>
-                <span id="progress-forenoon">0/2</span>
+            <div class="filter-section">
+                <input type="text" class="filter-input" id="searchInput" placeholder="🔍 Konto suchen (Nummer oder Bezeichnung)..." onkeyup="filterKonten()">
+                <select class="filter-select" id="klasseFilter" onchange="filterByKlasse()">
+                    <option value="">Alle Klassen</option>
+                    <option value="0">Klasse 0 - Anlagevermögen</option>
+                    <option value="1">Klasse 1 - Umlaufvermögen</option>
+                    <option value="2">Klasse 2 - Eigenkapital</option>
+                    <option value="3">Klasse 3 - Fremdkapital</option>
+                    <option value="4">Klasse 4 - Erlöse</option>
+                    <option value="5">Klasse 5 - Wareneinkauf</option>
+                    <option value="6">Klasse 6 - Aufwendungen</option>
+                    <option value="7">Klasse 7 - Weitere Erträge/Aufwend.</option>
+                    <option value="9">Klasse 9 - Vorträge</option>
+                </select>
+                <button class="btn btn-secondary" onclick="expandAll()">Alle auf-/zuklappen</button>
             </div>
-            <table class="task-table">
-                <tr class="task-row priority-high" data-time="forenoon">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Tägliche Lohnkontrolle</div>
-                        <div class="task-details">Zeiterfassung, Krankheiten, Urlaube prüfen</div>
-                    </td>
-                    <td class="task-cell">90 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Fehlende Stunden, Krankmeldungen..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-medium" data-time="forenoon">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Lexware-Arbeiten</div>
-                        <div class="task-details">Buchungen abschließen, kontrollieren</div>
-                    </td>
-                    <td class="task-cell">30 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Gebuchte Rechnungen, Probleme..."></textarea></td>
-                </tr>
-            </table>
-            <button class="add-task-btn" onclick="addTask('forenoon')">+ Aufgabe hinzufügen</button>
-        </div>
 
-        <!-- 13:30 - 16:30 Nachmittag -->
-        <div class="time-block">
-            <div class="time-header">
-                <span>📊 13:30 - 16:30 Uhr: Buchhaltung & Administration</span>
-                <span id="progress-afternoon">0/3</span>
+            <!-- Klasse 0: Anlagevermögen -->
+            <div class="klasse-section" data-klasse="0">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>0️⃣ Anlagevermögen</span>
+                        <span class="klasse-badge">14 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="135 edv-software">
+                        <div class="konto-nummer">135</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">EDV-Software, entgeltl. erworben</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="390 außenanlagen">
+                        <div class="konto-nummer">390</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Außenanlagen (fremde Grst.,Geschäftsb.)</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="400 technische anlagen">
+                        <div class="konto-nummer">400</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Technische Anlagen und Maschinen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="420 technische anlagen">
+                        <div class="konto-nummer">420</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Technische Anlagen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="440 maschinen">
+                        <div class="konto-nummer">440</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Maschinen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="520 pkw">
+                        <div class="konto-nummer">520</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Pkw</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="540 lkw">
+                        <div class="konto-nummer">540</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Lkw</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="560 transportmittel">
+                        <div class="konto-nummer">560</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Transportmittel</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="620 werkzeuge">
+                        <div class="konto-nummer">620</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Werkzeuge</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="630 betriebsausstattung">
+                        <div class="konto-nummer">630</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Betriebsausstattung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="650 büroeinrichtung">
+                        <div class="konto-nummer">650</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Büroeinrichtung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="670 gwg geringwertige">
+                        <div class="konto-nummer">670</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Geringwertige Wirtschaftsgüter <span class="badge-gwg">GWG</span></div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="690 sonstige betriebs">
+                        <div class="konto-nummer">690</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Betriebs-u.Gesch.ausstattung</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <table class="task-table">
-                <tr class="task-row priority-medium" data-time="afternoon">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Buchhaltung Nacharbeiten</div>
-                        <div class="task-details">Ausgangsrechnungen, offene Posten</div>
-                    </td>
-                    <td class="task-cell">90 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Erstellte Rechnungen, Zahlungseingänge..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-low" data-time="afternoon">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Kunden-E-Mails Nachbearbeitung</div>
-                        <div class="task-details">Rückfragen, Rechnungsstellung</div>
-                    </td>
-                    <td class="task-cell">60 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Offene Kundenanfragen..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-low" data-time="afternoon">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Administrative Aufgaben</div>
-                        <div class="task-details">Termine, Geschäftsführung</div>
-                    </td>
-                    <td class="task-cell">30 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Termine, wichtige Entscheidungen..."></textarea></td>
-                </tr>
-            </table>
-            <button class="add-task-btn" onclick="addTask('afternoon')">+ Aufgabe hinzufügen</button>
-        </div>
 
-        <!-- 16:30 - 17:00 Tagesabschluss -->
-        <div class="time-block">
-            <div class="time-header">
-                <span>✅ 16:30 - 17:00 Uhr: Tagesabschluss</span>
-                <span id="progress-end">0/3</span>
+            <!-- Klasse 1: Umlaufvermögen -->
+            <div class="klasse-section" data-klasse="1">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>1️⃣ Umlaufvermögen</span>
+                        <span class="klasse-badge">23 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="1000 bestand roh">
+                        <div class="konto-nummer">1000</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Bestand Roh-,Hilfs- und Betriebsstoffe</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1050 unfertige leistungen">
+                        <div class="konto-nummer">1050</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Unfertige Leistungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1180 anzahlungen vorräte">
+                        <div class="konto-nummer">1180</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Geleistete Anzahlungen auf Vorräte</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1200 forderungen lieferungen">
+                        <div class="konto-nummer">1200</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Forderungen aus L+L</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1248 pauschalwertberichtigung">
+                        <div class="konto-nummer">1248</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Pauschalwertberichtigung Forderg./b.1J</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1307 gesellschafter">
+                        <div class="konto-nummer">1307</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Forderungen gegen GmbH-Gesellschafter</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1340 personal lohn">
+                        <div class="konto-nummer">1340</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Forderg. gg. Personal Lohn- und Gehalt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1369 krankenkasse aag">
+                        <div class="konto-nummer">1369</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Forderungen ggb. Krankenkasse aus AAG</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1370 durchlaufende posten">
+                        <div class="konto-nummer">1370</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Durchlaufende Posten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1401 vorsteuer 7">
+                        <div class="konto-nummer">1401</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abziehbare Vorsteuer 7%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1402 vorsteuer eu">
+                        <div class="konto-nummer">1402</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abziehbare Vorsteuer aus EU-Erwerb</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1404 vorsteuer eu 19">
+                        <div class="konto-nummer">1404</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abziehbare Vorsteuer aus EU-Erwerb 19%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1406 vorsteuer 19">
+                        <div class="konto-nummer">1406</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abziehbare Vorsteuer 19%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1407 vorsteuer 13b">
+                        <div class="konto-nummer">1407</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abziehbare Vorsteuer § 13b UStG 19%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1420 ust vorauszahlungen">
+                        <div class="konto-nummer">1420</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Forderungen USt-Vorauszahlungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1435 gewerbesteuer">
+                        <div class="konto-nummer">1435</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Forderung aus Gewerbesteuerüberzahlung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1450 körperschaftsteuer">
+                        <div class="konto-nummer">1450</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Körperschaftsteuerrückforderung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1460 geldtransit">
+                        <div class="konto-nummer">1460</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Geldtransit</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1600 kasse">
+                        <div class="konto-nummer">1600</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Kasse</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1800 sparkasse">
+                        <div class="konto-nummer">1800</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sparkasse Saarbrücken # 67098301</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1801 sparkasse tagesgeld">
+                        <div class="konto-nummer">1801</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sparkasse Saarbrücken Tagesg. # 67099853</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1802 sparkasse zaunbau">
+                        <div class="konto-nummer">1802</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sparkasse Saarbrücken Zaunbau</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="1900 aktive rechnungsabgrenzung">
+                        <div class="konto-nummer">1900</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Aktive Rechnungsabgrenzung</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <table class="task-table">
-                <tr class="task-row priority-high" data-time="end">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">To-Do-Liste für morgen</div>
-                        <div class="task-details">Prioritäten festlegen</div>
-                    </td>
-                    <td class="task-cell">15 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Aufgaben für morgen..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-medium" data-time="end">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Abstimmung mit Mann</div>
-                        <div class="task-details">Tagesrückblick, wichtige Punkte</div>
-                    </td>
-                    <td class="task-cell">10 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Besprochene Themen..."></textarea></td>
-                </tr>
-                <tr class="task-row priority-low" data-time="end">
-                    <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                    <td class="task-cell">
-                        <div class="task-description">Abnahmen-Check für heute</div>
-                        <div class="task-details">Sind alle dokumentiert?</div>
-                    </td>
-                    <td class="task-cell">5 Min.</td>
-                    <td class="task-cell"><textarea class="notes-input" placeholder="Status Abnahmen..."></textarea></td>
-                </tr>
-            </table>
-            <button class="add-task-btn" onclick="addTask('end')">+ Aufgabe hinzufügen</button>
-        </div>
 
-        <div class="footer-stats">
-            <div><strong>Tagesfortschritt:</strong> <span id="total-progress">0/13 Aufgaben erledigt</span></div>
-            <div><strong>Aktuelle Zeit:</strong> <span id="current-time"></span></div>
+            <!-- Klasse 2: Eigenkapital -->
+            <div class="klasse-section" data-klasse="2">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>2️⃣ Eigenkapital</span>
+                        <span class="klasse-badge">2 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="2900 gezeichnetes kapital">
+                        <div class="konto-nummer">2900</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gezeichnetes Kapital</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="2970 gewinnvortrag">
+                        <div class="konto-nummer">2970</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gewinnvortrag vor Verwendung</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Klasse 3: Fremdkapital -->
+            <div class="klasse-section" data-klasse="3">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>3️⃣ Fremdkapital/Verbindlichkeiten</span>
+                        <span class="klasse-badge">53 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="3035 gewerbesteuer rückstellung">
+                        <div class="konto-nummer">3035</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gewerbesteuerrückstellung § 4 (5b) EStG</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3040 körperschaftsteuer rückstellung">
+                        <div class="konto-nummer">3040</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Körperschaftsteuerrückstellung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3070 arbeitszeitkonten">
+                        <div class="konto-nummer">3070</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Rückstellung für Arbeitszeitkonten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3071 sonstige rückstellungen">
+                        <div class="konto-nummer">3071</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Rückstellungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3074 personalkosten">
+                        <div class="konto-nummer">3074</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Rückstellungen für Personalkosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3090 gewährleistungen">
+                        <div class="konto-nummer">3090</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Rückstellungen f. Gewährleistungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3095 abschluss prüfung">
+                        <div class="konto-nummer">3095</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Rückstellungen für Abschluss u. Prüfung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3096 aufbewahrungspflicht">
+                        <div class="konto-nummer">3096</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Rückstellungen für Aufbewahrungspflicht</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3161 psa bank boxer">
+                        <div class="konto-nummer">3161</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">PSA Bank, Peugeot Boxer SB-SK1070</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3162 finanzierung peugeot 5008">
+                        <div class="konto-nummer">3162</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Finanzierung Peugeot 5008 SB-JS5008</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3163 psa bank citroen">
+                        <div class="konto-nummer">3163</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">PSA Bank, Finanzierung Citroen Jumper</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3168 deutsche leasing">
+                        <div class="konto-nummer">3168</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Deutsche Leasing Gartengeräte</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3210 darlehen psa citroen">
+                        <div class="konto-nummer">3210</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. PSA Bank Citroen Jumper SB-SK 2090</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3211 darlehen boxer kipper">
+                        <div class="konto-nummer">3211</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. PSA Bank Boxer Kipper SB-SK 1030</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3212 kfw darlehen">
+                        <div class="konto-nummer">3212</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Kfw-Darlehen Grenke #300266795</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3213 darlehen kipper">
+                        <div class="konto-nummer">3213</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. PSA Bank Kipper SB-SK 270</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3214 sparkasse darlehen">
+                        <div class="konto-nummer">3214</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. Spk. Sbr. #6740990889</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3215 sparkasse darlehen">
+                        <div class="konto-nummer">3215</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. Spk. Sbr. #6741208851</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3216 psa bank boxer">
+                        <div class="konto-nummer">3216</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot Boxer SB-SK 1070</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3217 psa bank 208">
+                        <div class="konto-nummer">3217</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot 208 SB-FK 1910</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3218 psa bank boxer">
+                        <div class="konto-nummer">3218</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot Boxer SB-SK 1080</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3219 psa bank traveller">
+                        <div class="konto-nummer">3219</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot Trav. SB-SJ 486</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3272 erhaltene anzahlungen">
+                        <div class="konto-nummer">3272</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erhaltene Anzahlungen 19% USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3280 erhaltene anzahlungen">
+                        <div class="konto-nummer">3280</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erhaltene Anzahlungen (bis 1 Jahr)</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3300 verbindlichkeiten lieferungen">
+                        <div class="konto-nummer">3300</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichkeiten aus Lieferungen+Leist.</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3500 sonstige verbindlichkeiten">
+                        <div class="konto-nummer">3500</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Verbindlichkeiten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3515 gesellschafter jessika">
+                        <div class="konto-nummer">3515</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Vb.gg. Gesellschaftern Jessika Krämer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3562 psa bank active">
+                        <div class="konto-nummer">3562</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">PSA Bank, Finanzierung Actice Pack</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3563 finanzierung boxer">
+                        <div class="konto-nummer">3563</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Finanzierung PSA Bank Peugeot Boxer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3564 darlehen partner">
+                        <div class="konto-nummer">3564</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Darlehen PSA Bank Peugeot Partner</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3570 mietkauf arbeitsbühne">
+                        <div class="konto-nummer">3570</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf abfinance GmbH Arbeitsbühne</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3571 mietkauf deutsche leasing">
+                        <div class="konto-nummer">3571</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf Deutsche Leasing Gartengeräte</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3572 mietkauf terrax">
+                        <div class="konto-nummer">3572</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf Deutsche Leasing Huco Terrax</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3573 mietkauf dreiseitenkipper">
+                        <div class="konto-nummer">3573</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf abcfinance GmbH Dreis.kipper</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3574 mietkauf ford ranger">
+                        <div class="konto-nummer">3574</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf abcfinance GmbH Ford Ranger</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3575 mietkauf kompaktlader">
+                        <div class="konto-nummer">3575</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf Vermeer Finace Kompaktlader</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3576 mietkauf renault traffic">
+                        <div class="konto-nummer">3576</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf abcfinance Renault Traffic</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3577 mietkauf teleskoplader">
+                        <div class="konto-nummer">3577</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf dll financial Teleskoplader</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3578 mietkauf renault">
+                        <div class="konto-nummer">3578</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf abcfinance Renault Traffic</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3579 finanzierung minibagger">
+                        <div class="konto-nummer">3579</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Finanzierung CAT Financial Minibagger</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3580 mietkauf ford transit">
+                        <div class="konto-nummer">3580</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf abcfinance Ford Transit</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3581 mietkauf ford ranger">
+                        <div class="konto-nummer">3581</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietkauf abcfinance Ford Ranger</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3582 finanzierung holzhäcksler">
+                        <div class="konto-nummer">3582</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">De Lage Finanzierung Holzhäcksler</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3610 kreditkartenabrechnung">
+                        <div class="konto-nummer">3610</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Kreditkartenabrechnung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3695 verrechnung anzahlungen">
+                        <div class="konto-nummer">3695</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verrechnung geleistete Anzahlungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3720 verbindlichkeiten lohn">
+                        <div class="konto-nummer">3720</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichkeiten aus Lohn und Gehalt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3721 offene löhne">
+                        <div class="konto-nummer">3721</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Offene Löhne 2020, 2021 und 2022</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3725 einbehaltung arbeitnehmer">
+                        <div class="konto-nummer">3725</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichk. Einbehaltung Arbeitnehmer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3730 lohnsteuer kirchensteuer">
+                        <div class="konto-nummer">3730</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichk. Lohn- und Kirchensteuer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3740 sozialversicherung">
+                        <div class="konto-nummer">3740</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Voraus.Beitrag ggb. Sozialversicherung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3742 arbeitszeitkonto">
+                        <div class="konto-nummer">3742</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichkeiten Arbeitszeitkonto</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3743 soziale sicherheit">
+                        <div class="konto-nummer">3743</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichkeiten soziale Sicherheit</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3759 soziale sicherheit">
+                        <div class="konto-nummer">3759</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichkeiten soziale Sicherheit</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3770 vermögensbildung">
+                        <div class="konto-nummer">3770</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichkeiten a. Vermögensbildung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3790 lohn gehaltsverrechnungen">
+                        <div class="konto-nummer">3790</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Lohn- und Gehaltsverrechnungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3801 umsatzsteuer 7">
+                        <div class="konto-nummer">3801</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer 7%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3802 umsatzsteuer eu">
+                        <div class="konto-nummer">3802</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer aus EU-Erwerb</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3804 umsatzsteuer eu 19">
+                        <div class="konto-nummer">3804</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer aus EU-Erwerb 19%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3806 umsatzsteuer 19">
+                        <div class="konto-nummer">3806</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer 19%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3818 ust eu-land">
+                        <div class="konto-nummer">3818</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">USt im anderen EU-Land s.Leist./Werkl.</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3820 umsatzsteuer vorauszahlungen">
+                        <div class="konto-nummer">3820</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer-Vorauszahlungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3830 umsatzsteuer 1/11">
+                        <div class="konto-nummer">3830</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer-Vorauszahlungen 1/11</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3837 umsatzsteuer 13b">
+                        <div class="konto-nummer">3837</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer nach § 13b UStG 19%</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3841 umsatzsteuer vorjahr">
+                        <div class="konto-nummer">3841</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer Vorjahr</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3845 umsatzsteuer frühere">
+                        <div class="konto-nummer">3845</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Umsatzsteuer frühere Jahre</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="3860 verbindlichkeiten ust">
+                        <div class="konto-nummer">3860</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verbindlichkeiten aus Umsatzsteuer-VZ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Klasse 4: Erlöse -->
+            <div class="klasse-section" data-klasse="4">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>4️⃣ Betriebliche Erträge</span>
+                        <span class="klasse-badge">14 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="4200 erlöse">
+                        <div class="konto-nummer">4200</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erlöse</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4300 erlöse 7">
+                        <div class="konto-nummer">4300</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erlöse 7% USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4320 eu-land lieferungen">
+                        <div class="konto-nummer">4320</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erl.a.im and.EU-Land stpfl.Lieferungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4339 nicht steuerbare">
+                        <div class="konto-nummer">4339</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Nicht steuerbare Umsätze EU-Land</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4400 erlöse 19">
+                        <div class="konto-nummer">4400</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erlöse 19% USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4402 erlöse 19">
+                        <div class="konto-nummer">4402</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erlöse 19% USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4410 erlöse 19">
+                        <div class="konto-nummer">4410</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erlöse 19% USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4730 gewährte skonti">
+                        <div class="konto-nummer">4730</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gewährte Skonti</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4736 skonti 19">
+                        <div class="konto-nummer">4736</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gewährte Skonti 19 % USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4830 sonstige betriebliche">
+                        <div class="konto-nummer">4830</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige betriebliche Erträge</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4839 erträge unregelmäßig">
+                        <div class="konto-nummer">4839</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Erträge unregelmäßig</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4946 sachbezüge">
+                        <div class="konto-nummer">4946</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verrechnete sonstige Sachbezüge</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4947 sachbezüge fahrzeug">
+                        <div class="konto-nummer">4947</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verrech. sonstige Sachbezüge Fzg 19% USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4949 sachbezüge ohne ust">
+                        <div class="konto-nummer">4949</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verrechn. sonstige Sachbezüge ohne USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="4972 erstattungen aag">
+                        <div class="konto-nummer">4972</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erstattungen AufwendungsausgleichsG</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Klasse 5: Wareneinkauf -->
+            <div class="klasse-section" data-klasse="5">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>5️⃣ Material- und Wareneinkauf</span>
+                        <span class="klasse-badge">7 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="5200 wareneingang">
+                        <div class="konto-nummer">5200</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Wareneingang</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="5300 wareneingang 7">
+                        <div class="konto-nummer">5300</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Wareneingang 7% Vorsteuer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="5400 wareneingang 19">
+                        <div class="konto-nummer">5400</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Wareneingang 19% Vorsteuer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="5420 eu-erwerb 7">
+                        <div class="konto-nummer">5420</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">EU-Erwerb 7% Vorst./USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="5425 eu-erwerb 19">
+                        <div class="konto-nummer">5425</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">EU-Erwerb 19% Vorst./USt</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="5736 erhaltene skonti">
+                        <div class="konto-nummer">5736</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Erhaltene Skonti 19% Vorsteuer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="5800 bezugsnebenkosten">
+                        <div class="konto-nummer">5800</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Bezugsnebenkosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="5900 fremdleistungen">
+                        <div class="konto-nummer">5900</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Fremdleistungen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Klasse 6: Betriebliche Aufwendungen -->
+            <div class="klasse-section" data-klasse="6">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>6️⃣ Betriebliche Aufwendungen</span>
+                        <span class="klasse-badge">61 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="6010 löhne">
+                        <div class="konto-nummer">6010</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Löhne</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6020 gehälter">
+                        <div class="konto-nummer">6020</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gehälter</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6024 geschäftsführergehälter">
+                        <div class="konto-nummer">6024</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Geschäftsführergehälter GmbH-Gesells.</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6035 minijobs">
+                        <div class="konto-nummer">6035</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Löhne für Minijobs</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6036 pauschale steuer minijobber">
+                        <div class="konto-nummer">6036</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Pauschale Steuer für Minijobber</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6037 pauschale steuer gesellschafter">
+                        <div class="konto-nummer">6037</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Pauschale Steuer für Gesellschafter-GF</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6060 freiwillige soziale">
+                        <div class="konto-nummer">6060</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Freiwillige soziale Aufwendung. LSt-pfl.</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6066 zuwendungen minijobber">
+                        <div class="konto-nummer">6066</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Freiwillige Zuwendungen an Minijobber</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6069 pauschale steuer bezüge">
+                        <div class="konto-nummer">6069</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Pauschale Steuer auf sonstige Bezüge</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6072 sachzuwendungen an">
+                        <div class="konto-nummer">6072</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sachzuwendungen und Dienstleistg. an AN</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6073 sachzuwendungen gesellschafter">
+                        <div class="konto-nummer">6073</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sachzuwend., Dienstleistungen Ges.er-GF</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6110 gesetzliche sozialaufwendungen">
+                        <div class="konto-nummer">6110</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gesetzliche Sozialaufwendungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6120 berufsgenossenschaft">
+                        <div class="konto-nummer">6120</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Beiträge zur Berufsgenossenschaft</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6130 freiwillige soziale lst-frei">
+                        <div class="konto-nummer">6130</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Freiwillige soziale Aufwendung. LSt-frei</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6150 versorgungskassen">
+                        <div class="konto-nummer">6150</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Versorgungskassen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6170 sonstige soziale abgaben">
+                        <div class="konto-nummer">6170</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige soziale Abgaben</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6171 soziale abgaben minijobber">
+                        <div class="konto-nummer">6171</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Soziale Abgaben für Minijobber</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6200 abschreibung immaterielle">
+                        <div class="konto-nummer">6200</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abschreibung immaterielle VermG</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6220 abschreibungen sachanlagen">
+                        <div class="konto-nummer">6220</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abschreibungen auf Sachanlagen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6221 abschreibungen gebäude">
+                        <div class="konto-nummer">6221</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abschreibungen auf Gebäude</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6222 abschreibungen fahrzeuge">
+                        <div class="konto-nummer">6222</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abschreibungen auf Fahrzeuge</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6260 sofortabschreibung gwg">
+                        <div class="konto-nummer">6260</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sofortabschreibung GWG</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6262 abschreibungen aktivierte gwg">
+                        <div class="konto-nummer">6262</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abschreibungen auf aktivierte GWG</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6300 sonstige betriebliche">
+                        <div class="konto-nummer">6300</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige betriebliche Aufwendungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6303 fremdleistungen fremdarbeiten">
+                        <div class="konto-nummer">6303</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Fremdleistungen und Fremdarbeiten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6310 miete unbewegliche">
+                        <div class="konto-nummer">6310</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Miete, unbewegliche Wirtschaftsgüter</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6330 reinigung">
+                        <div class="konto-nummer">6330</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Reinigung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6335 instandhaltung räume">
+                        <div class="konto-nummer">6335</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Instandhaltung betrieblicher Räume</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6400 versicherungen">
+                        <div class="konto-nummer">6400</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Versicherungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6420 beiträge">
+                        <div class="konto-nummer">6420</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Beiträge</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6430 sonstige abgaben">
+                        <div class="konto-nummer">6430</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Abgaben</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6436 verspätungszuschlag">
+                        <div class="konto-nummer">6436</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abzugsf.Verspätungszuschlag/Zwangsgeld</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6450 reparatur bauten">
+                        <div class="konto-nummer">6450</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Reparatur u.Instandhaltung von Bauten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6460 reparatur anlagen">
+                        <div class="konto-nummer">6460</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Reparatur/Instandh. Anlagen u. Maschinen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6470 reparatur bga">
+                        <div class="konto-nummer">6470</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Reparatur/Instandh.v.and.Anlagen u. BGA</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6490 sonstige reparaturen">
+                        <div class="konto-nummer">6490</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Reparaturen u.Instandhaltungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6495 wartungskosten">
+                        <div class="konto-nummer">6495</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Wartungskosten für Hard- und Software</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6520 fahrzeug versicherungen">
+                        <div class="konto-nummer">6520</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Fahrzeug-Versicherungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6530 laufende fahrzeug">
+                        <div class="konto-nummer">6530</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Laufende Fahrzeug-Betriebskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6540 fahrzeug reparaturen">
+                        <div class="konto-nummer">6540</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Fahrzeug-Reparaturen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6560 mietleasing kfz">
+                        <div class="konto-nummer">6560</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietleasing Kfz</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6561">
+                        <div class="konto-nummer">6561</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">[Konto 6561]</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6570 sonstige fahrzeugkosten">
+                        <div class="konto-nummer">6570</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstige Fahrzeugkosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6580 mautgebühren">
+                        <div class="konto-nummer">6580</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mautgebühren</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6600 werbekosten">
+                        <div class="konto-nummer">6600</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Werbekosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6601 messestand">
+                        <div class="konto-nummer">6601</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Messestand</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6605 streuartikel">
+                        <div class="konto-nummer">6605</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Streuartikel</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6630 repräsentationskosten">
+                        <div class="konto-nummer">6630</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Repräsentationskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6631 bewirtung intern">
+                        <div class="konto-nummer">6631</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Bewirtung intern</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6632 dekoration">
+                        <div class="konto-nummer">6632</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Dekoration</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6640 bewirtungskosten">
+                        <div class="konto-nummer">6640</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Bewirtungskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6643 aufmerksamkeiten">
+                        <div class="konto-nummer">6643</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Aufmerksamkeiten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6644 nicht abzugsfähige bewirtung">
+                        <div class="konto-nummer">6644</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Nicht abzugsfähige Bewirtungskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6645 nicht abzugsfähige betriebsausgaben">
+                        <div class="konto-nummer">6645</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Nicht abzugsfähige Betriebsausgaben</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6650 reisekosten arbeitnehmer">
+                        <div class="konto-nummer">6650</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Reisekosten Arbeitnehmer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6660 reisekosten übernachtung">
+                        <div class="konto-nummer">6660</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Reisekosten AN Übernachtungsaufwand</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6664 reisekosten verpflegung">
+                        <div class="konto-nummer">6664</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Reisekosten AN Verpfleg.mehraufwand</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6710 verpackungsmaterial">
+                        <div class="konto-nummer">6710</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Verpackungsmaterial</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6800 porto">
+                        <div class="konto-nummer">6800</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Porto</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6805 telefon">
+                        <div class="konto-nummer">6805</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Telefon</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6810 internetkosten">
+                        <div class="konto-nummer">6810</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Internetkosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6815 bürobedarf">
+                        <div class="konto-nummer">6815</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Bürobedarf</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6820 zeitschriften bücher">
+                        <div class="konto-nummer">6820</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Zeitschrift./Bücher/dig.Medien(Fachlit.)</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6821 fortbildungskosten">
+                        <div class="konto-nummer">6821</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Fortbildungskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6822 freiwillige sozialleistungen">
+                        <div class="konto-nummer">6822</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Freiwillige Sozialleistungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6825 rechts beratungskosten">
+                        <div class="konto-nummer">6825</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Rechts- und Beratungskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6827 abschluss prüfungskosten">
+                        <div class="konto-nummer">6827</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Abschluss- und Prüfungskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6830 buchführungskosten">
+                        <div class="konto-nummer">6830</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Buchführungskosten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6835 mieten einrichtungen">
+                        <div class="konto-nummer">6835</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mieten für Einrichtungen bewegliche WG</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6837 lizenzen konzessionen">
+                        <div class="konto-nummer">6837</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Aufwendungen für Lizenzen, Konzessionen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6840 mlf mercator">
+                        <div class="konto-nummer">6840</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">MLF Mercator-Leasing</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6841 miete bewegliche">
+                        <div class="konto-nummer">6841</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Miete bewegliche Wirtschaftsgüter</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6842 grenke leasing">
+                        <div class="konto-nummer">6842</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Grenke Leasing</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6844 mietleasing targo">
+                        <div class="konto-nummer">6844</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Mietleasing TARGO Bank, iPhone</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6845 werkzeuge kleingeräte">
+                        <div class="konto-nummer">6845</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Werkzeuge und Kleingeräte</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6850 sonstiger betriebsbedarf">
+                        <div class="konto-nummer">6850</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Sonstiger Betriebsbedarf</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6851 berufsbekleidung">
+                        <div class="konto-nummer">6851</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Berufsbekleidung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6855 nebenkosten geldverkehr">
+                        <div class="konto-nummer">6855</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Nebenkosten des Geldverkehrs</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6859 abraum abfallbeseitigung">
+                        <div class="konto-nummer">6859</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Aufwand Abraum-/Abfallbeseitigung</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6880 währungsumrechnungen">
+                        <div class="konto-nummer">6880</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Aufwendungen aus Währungsumrechnungen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="6960 periodenfremde aufwendungen">
+                        <div class="konto-nummer">6960</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Periodenfremde Aufwendungen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Klasse 7: Weitere Erträge und Aufwendungen -->
+            <div class="klasse-section" data-klasse="7">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>7️⃣ Weitere Erträge und Aufwendungen</span>
+                        <span class="klasse-badge">6 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="7310 zinsaufwendungen kurzfristig">
+                        <div class="konto-nummer">7310</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Zinsaufwendungen f.kfr.Verbindlichkeit.</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="7320 zinsaufwendungen langfristig">
+                        <div class="konto-nummer">7320</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Zinsaufwendungen f.lfr.Verbindlichkeit.</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="7326 zinsen finanzierung">
+                        <div class="konto-nummer">7326</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Zinsen zur Finanzierung Anlagevermögen</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="7355 kreditprovision">
+                        <div class="konto-nummer">7355</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Kreditprovision,Verwaltungskostenbeitr.</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="7600 körperschaftsteuer">
+                        <div class="konto-nummer">7600</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Körperschaftsteuer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="7608 solidaritätszuschlag">
+                        <div class="konto-nummer">7608</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Solidaritätszuschlag</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="7610 gewerbesteuer">
+                        <div class="konto-nummer">7610</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Gewerbesteuer</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="7685 kfz-steuern">
+                        <div class="konto-nummer">7685</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Kfz-Steuern</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Klasse 9: Vorträge -->
+            <div class="klasse-section" data-klasse="9">
+                <div class="klasse-header" onclick="toggleKlasse(this)">
+                    <div class="klasse-title">
+                        <span>9️⃣ Saldenvorträge</span>
+                        <span class="klasse-badge">3 Konten</span>
+                    </div>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="konten-grid">
+                    <div class="konto-card" data-search="9000 saldenvorträge sachkonten">
+                        <div class="konto-nummer">9000</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Saldenvorträge Sachkonten</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="9008 saldenvorträge debitoren">
+                        <div class="konto-nummer">9008</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Saldenvorträge Debitoren</div>
+                        </div>
+                    </div>
+                    <div class="konto-card" data-search="9009 saldenvorträge kreditoren">
+                        <div class="konto-nummer">9009</div>
+                        <div class="konto-info">
+                            <div class="konto-bezeichnung">Saldenvorträge Kreditoren</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="export-buttons">
+                <button class="btn" onclick="exportKontenplan()">📥 Kontenplan exportieren (Excel)</button>
+                <button class="btn btn-secondary" onclick="printKontenplan()">🖨️ Drucken</button>
+                <button class="btn btn-secondary" onclick="copyAllKonten()">📋 Alle kopieren</button>
+            </div>
+
+            <div class="info-box">
+                <h3>📌 Zusammenfassung Ihrer Kontenstruktur</h3>
+                <p>Ihr DATEV-Kontenrahmen für die <strong>gardenKeeper® GmbH</strong> umfasst insgesamt <span class="highlight">146 Sachkonten</span> 
+                mit Schwerpunkt auf:</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✅ <strong>Umfangreiche Fahrzeugfinanzierungen</strong> (PSA Bank, abcfinance, etc.)</li>
+                    <li>✅ <strong>Diverse Leasingverträge</strong> (Grenke, Deutsche Leasing, Mercator)</li>
+                    <li>✅ <strong>Detaillierte Personalkonten</strong> (inkl. Minijobs und Gesellschafter-GF)</li>
+                    <li>✅ <strong>Vollständige Umsatzsteuer-Konten</strong> (inkl. EU und §13b UStG)</li>
+                    <li>✅ <strong>Spezielle Gartengeräte-Finanzierungen</strong> (passend zum Geschäftsbereich)</li>
+                </ul>
+            </div>
         </div>
     </div>
 
+    <div class="quick-stats">
+        <strong>Gefilterte Konten:</strong> <span id="filteredCount">146</span> / 146
+    </div>
+
     <script>
-        // Aktuelles Datum setzen
-        document.getElementById('currentDate').value = new Date().toISOString().split('T')[0];
-        
-        // Uhrzeit anzeigen
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('current-time').textContent = now.toLocaleTimeString('de-DE');
+        function toggleKlasse(header) {
+            const section = header.parentElement;
+            section.classList.toggle('active');
         }
-        updateTime();
-        setInterval(updateTime, 1000);
 
-        function updateProgress() {
-            const timeBlocks = ['early', 'morning', 'forenoon', 'afternoon', 'end'];
-            let totalTasks = 0;
-            let totalCompleted = 0;
+        function expandAll() {
+            const sections = document.querySelectorAll('.klasse-section');
+            const allActive = Array.from(sections).every(s => s.classList.contains('active'));
+            
+            sections.forEach(section => {
+                if (allActive) {
+                    section.classList.remove('active');
+                } else {
+                    section.classList.add('active');
+                }
+            });
+        }
 
-            timeBlocks.forEach(timeBlock => {
-                const checkboxes = document.querySelectorAll(`tr[data-time="${timeBlock}"] .checkbox`);
-                const completed = document.querySelectorAll(`tr[data-time="${timeBlock}"] .checkbox:checked`);
+        function filterKonten() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const klasseValue = document.getElementById('klasseFilter').value;
+            const cards = document.querySelectorAll('.konto-card');
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                const searchText = card.getAttribute('data-search');
+                const parentKlasse = card.closest('.klasse-section').getAttribute('data-klasse');
                 
-                document.getElementById(`progress-${timeBlock}`).textContent = `${completed.length}/${checkboxes.length}`;
+                const matchesSearch = !searchValue || searchText.includes(searchValue);
+                const matchesKlasse = !klasseValue || parentKlasse === klasseValue;
                 
-                // Zeile als erledigt markieren
-                checkboxes.forEach((checkbox, index) => {
-                    const row = checkbox.closest('.task-row');
-                    if (checkbox.checked) {
-                        row.classList.add('completed');
-                    } else {
-                        row.classList.remove('completed');
-                    }
+                if (matchesSearch && matchesKlasse) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Update counter
+            document.getElementById('filteredCount').textContent = visibleCount;
+            
+            // Auto-expand sections with results
+            document.querySelectorAll('.klasse-section').forEach(section => {
+                const hasVisibleCards = Array.from(section.querySelectorAll('.konto-card'))
+                    .some(card => card.style.display !== 'none');
+                if (hasVisibleCards && searchValue) {
+                    section.classList.add('active');
+                }
+            });
+        }
+
+        function filterByKlasse() {
+            filterKonten();
+        }
+
+        function exportKontenplan() {
+            const konten = [];
+            const sections = document.querySelectorAll('.klasse-section');
+            
+            sections.forEach(section => {
+                const klasse = section.getAttribute('data-klasse');
+                const cards = section.querySelectorAll('.konto-card');
+                
+                cards.forEach(card => {
+                    const nummer = card.querySelector('.konto-nummer').textContent;
+                    const bezeichnung = card.querySelector('.konto-bezeichnung').textContent.replace(/GWG/, '').trim();
+                    konten.push(`${nummer}\t${bezeichnung}\tKlasse ${klasse}`);
                 });
-
-                totalTasks += checkboxes.length;
-                totalCompleted += completed.length;
             });
-
-            document.getElementById('total-progress').textContent = `${totalCompleted}/${totalTasks} Aufgaben erledigt`;
+            
+            const header = "Kontonummer\tBezeichnung\tKlasse\n";
+            const content = header + konten.join('\n');
+            
+            const blob = new Blob([content], { type: 'text/tab-separated-values;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'gardenkeeper_datev_kontenplan.tsv';
+            link.click();
         }
 
-        function addTask(timeBlock) {
-            const table = document.querySelector(`tr[data-time="${timeBlock}"]`).closest('table');
-            const newRow = document.createElement('tr');
-            newRow.className = 'task-row priority-low';
-            newRow.setAttribute('data-time', timeBlock);
-            
-            newRow.innerHTML = `
-                <td class="task-cell"><input type="checkbox" class="checkbox" onchange="updateProgress()"></td>
-                <td class="task-cell">
-                    <input type="text" placeholder="Neue Aufgabe eingeben..." style="width: 100%; border: 1px solid #ddd; padding: 5px; border-radius: 3px;">
-                </td>
-                <td class="task-cell">
-                    <input type="text" placeholder="Zeit" style="width: 70px; border: 1px solid #ddd; padding: 5px; border-radius: 3px;">
-                </td>
-                <td class="task-cell"><textarea class="notes-input" placeholder="Notizen..."></textarea></td>
-            `;
-            
-            table.appendChild(newRow);
-            updateProgress();
+        function printKontenplan() {
+            window.print();
         }
 
-        function exportTasks() {
-            const date = document.getElementById('currentDate').value;
-            let export_text = `Tagesübersicht vom ${date}\n${'='.repeat(40)}\n\n`;
-            
-            const timeBlocks = [
-                {key: 'early', name: '6:45-8:30 Operative Unterstützung & Abnahmen'},
-                {key: 'morning', name: '8:30-10:30 Kommunikation & Buchhaltung'},
-                {key: 'forenoon', name: '10:30-12:30 Lohnthemen & Lexware'},
-                {key: 'afternoon', name: '13:30-16:30 Buchhaltung & Administration'},
-                {key: 'end', name: '16:30-17:00 Tagesabschluss'}
-            ];
-
-            timeBlocks.forEach(block => {
-                export_text += `${block.name}\n${'-'.repeat(block.name.length)}\n`;
-                
-                const rows = document.querySelectorAll(`tr[data-time="${block.key}"]`);
-                rows.forEach(row => {
-                    const checkbox = row.querySelector('.checkbox');
-                    const taskDesc = row.querySelector('.task-description')?.textContent || 
-                                   row.querySelector('input[type="text"]')?.value || 'Neue Aufgabe';
-                    const notes = row.querySelector('.notes-input').value;
-                    const status = checkbox.checked ? '✅' : '⭕';
-                    
-                    export_text += `${status} ${taskDesc}`;
-                    if (notes) export_text += ` (${notes})`;
-                    export_text += '\n';
-                });
-                export_text += '\n';
+        function copyAllKonten() {
+            const konten = [];
+            document.querySelectorAll('.konto-card').forEach(card => {
+                if (card.style.display !== 'none') {
+                    const nummer = card.querySelector('.konto-nummer').textContent;
+                    const bezeichnung = card.querySelector('.konto-bezeichnung').textContent;
+                    konten.push(`${nummer}\t${bezeichnung}`);
+                }
             });
-
-            // Text in Zwischenablage kopieren
-            navigator.clipboard.writeText(export_text).then(() => {
-                alert('Tagesübersicht wurde in die Zwischenablage kopiert!');
+            
+            navigator.clipboard.writeText(konten.join('\n')).then(() => {
+                alert('Kontenplan wurde in die Zwischenablage kopiert!');
             });
         }
-
-        function resetDay() {
-            if (confirm('Alle Häkchen und Notizen für heute zurücksetzen?')) {
-                document.querySelectorAll('.checkbox').forEach(cb => cb.checked = false);
-                document.querySelectorAll('.notes-input').forEach(input => input.value = '');
-                updateProgress();
-            }
-        }
-
-        // Initial progress update
-        updateProgress();
     </script>
 </body>
 </html>
