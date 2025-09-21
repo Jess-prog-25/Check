@@ -3,1947 +3,1538 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gardenKeeper® DATEV-Kontenplan - Vollständige Übersicht</title>
+    <title>🌱 gardenKeeper® - Bedienungsanleitung für unser tolles Team!</title>
     <style>
-        :root {
-            /* gardenKeeper Farben in Pastell */
-            --garden-primary: #c7e9c0;
-            --garden-secondary: #d4e8c4;
-            --garden-accent: #e8d5b7;
-            --pastel-pink: #ffd1dc;
-            --pastel-blue: #b5d3e7;
-            --pastel-green: #c7e9c0;
-            --pastel-yellow: #fff5ba;
-            --pastel-purple: #e0c3fc;
-            --pastel-peach: #ffe5cc;
-            --pastel-mint: #c5f0e3;
-            --text-dark: #4a5f3a;
-            --text-light: #7a8f6a;
-            --white: #ffffff;
-            --border-color: #e0d5e7;
-            --hover-bg: #f5f0fa;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-green: #2d5016;
+            --sage-green: #8fa68f;
+            --light-moss: #a8c09a;
+            --pale-lime: #c1d4b1;
+            --warm-chestnut: #8b7355;
+            --soft-clay: #a08879;
+            --light-sand: #c4b5a0;
+            --cream-white: #f5f3f0;
+            --dark-forest: #2d3e2d;
+            --gradient-1: linear-gradient(135deg, #2d5016, #8fa68f, #c1d4b1);
+            --gradient-2: linear-gradient(45deg, #8b7355, #a08879, #c4b5a0);
+            --gradient-friendly: linear-gradient(135deg, #6b8e23, #8fbc8f, #98fb98);
+            --shadow-glow: 0 20px 60px rgba(45, 80, 22, 0.3);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, #c7e9c0 0%, #fff5ba 50%, #b5d3e7 100%);
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: var(--cream-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #2d5016, #1a2f0a, #8fa68f, #2d5016);
+            background-size: 400% 400%;
+            animation: gradientWave 15s ease infinite;
+        }
+
+        @keyframes gradientWave {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--pale-lime);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatUp 15s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .hero {
             min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--garden-primary) 0%, var(--pastel-blue) 100%);
-            color: var(--text-dark);
-            padding: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-        }
-
-        .logo-text {
-            font-size: 1rem;
-            color: var(--text-light);
-            font-style: italic;
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--pastel-mint) 0%, var(--pastel-green) 100%);
-            padding: 15px;
-            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .filter-section {
-            background: var(--pastel-yellow);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filter-input {
-            flex: 1;
-            min-width: 300px;
-            padding: 12px 20px;
-            border: 2px solid var(--garden-primary);
-            border-radius: 25px;
-            font-size: 16px;
-        }
-
-        .filter-input:focus {
-            outline: none;
-            border-color: var(--garden-secondary);
-            box-shadow: 0 0 0 3px rgba(199, 233, 192, 0.3);
-        }
-
-        .filter-select {
-            padding: 12px 20px;
-            border: 2px solid var(--garden-primary);
-            border-radius: 25px;
-            font-size: 16px;
-            background: var(--white);
-            cursor: pointer;
-        }
-
-        .klasse-section {
-            margin-bottom: 40px;
-        }
-
-        .klasse-header {
-            background: linear-gradient(135deg, var(--pastel-purple) 0%, var(--pastel-blue) 100%);
-            color: var(--text-dark);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .klasse-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .klasse-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .klasse-badge {
-            background: rgba(255,255,255,0.5);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .konten-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-            max-height: 0;
+            position: relative;
             overflow: hidden;
-            transition: max-height 0.5s ease;
         }
 
-        .klasse-section.active .konten-grid {
-            max-height: 5000px;
+        .hero-content {
+            z-index: 2;
+            animation: heroFadeIn 2s ease-out;
         }
 
-        .konto-card {
-            background: var(--white);
-            border: 2px solid var(--pastel-green);
-            border-radius: 10px;
-            padding: 15px;
-            transition: all 0.3s ease;
+        @keyframes heroFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            background: var(--gradient-friendly);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% {
+                filter: drop-shadow(0 0 20px rgba(193, 212, 177, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 40px rgba(193, 212, 177, 0.8));
+            }
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--pale-lime);
+            margin-bottom: 1rem;
+            animation: slideInFromRight 2s ease-out 0.5s both;
+        }
+
+        .hero .team-message {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #98fb98;
+            margin-bottom: 3rem;
+            font-weight: 500;
+            animation: slideInFromLeft 2s ease-out 1s both;
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-30px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .nav-toggle {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(193, 212, 177, 0.3);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--pale-lime);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .konto-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-color: var(--garden-primary);
-            background: var(--pastel-peach);
+        .nav-toggle:hover {
+            transform: scale(1.1);
+            border-color: rgba(193, 212, 177, 0.6);
+            box-shadow: 0 15px 40px rgba(45, 80, 22, 0.4);
         }
 
-        .konto-nummer {
-            background: var(--garden-primary);
-            color: var(--text-dark);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            min-width: 70px;
+        .nav {
+            position: absolute;
+            top: 70px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(193, 212, 177, 0.2);
+            border-radius: 20px;
+            padding: 1.5rem;
+            min-width: 250px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .nav::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: 25px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid rgba(0, 0, 0, 0.95);
+        }
+
+        .nav-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .nav-item {
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-friendly);
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: block;
             text-align: center;
         }
 
-        .konto-info {
-            flex: 1;
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
 
-        .konto-bezeichnung {
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            line-height: 1.3;
+        .nav-item:hover {
+            transform: translateX(5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.4);
         }
 
-        .toggle-icon {
-            font-size: 1.2rem;
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 8rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-friendly);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        /* Friendly Boxes */
+        .friendly-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(107, 142, 35, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .friendly-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-friendly);
+            transform: scaleX(0);
             transition: transform 0.3s ease;
         }
 
-        .klasse-section.active .toggle-icon {
-            transform: rotate(180deg);
+        .friendly-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(107, 142, 35, 0.4);
+            border-color: rgba(152, 251, 152, 0.5);
         }
 
-        .export-buttons {
+        .friendly-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-greeting {
+            background: linear-gradient(135deg, rgba(152, 251, 152, 0.2), rgba(107, 142, 35, 0.1));
+            border: 3px solid #6b8e23;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            animation: greetingPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes greetingPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(107, 142, 35, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(107, 142, 35, 0.6);
+            }
+        }
+
+        .team-greeting h3 {
+            font-size: 2rem;
+            color: #98fb98;
+            margin-bottom: 1rem;
+        }
+
+        .team-greeting p {
+            font-size: 1.2rem;
+            color: var(--pale-lime);
+        }
+
+        /* Step Guide */
+        .step-guide {
+            display: grid;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border-left: 5px solid var(--sage-green);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(152, 251, 152, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .step:hover::before {
+            transform: translateX(100%);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-friendly);
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: var(--shadow-glow);
+            animation: pulse 2s infinite;
         }
 
-        .btn {
-            background: linear-gradient(135deg, var(--garden-primary) 0%, var(--pastel-green) 100%);
-            color: var(--text-dark);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(152, 251, 152, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(152, 251, 152, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(152, 251, 152, 0);
+            }
+        }
+
+        .step-content h4 {
+            font-size: 1.5rem;
+            color: var(--pale-lime);
+            margin-bottom: 1rem;
+        }
+
+        .step-content p {
+            color: var(--cream-white);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(152, 251, 152, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
             cursor: pointer;
-            font-size: 16px;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-friendly);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 30px 80px rgba(107, 142, 35, 0.4);
+            border-color: rgba(152, 251, 152, 0.5);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
             font-weight: 600;
+            margin-bottom: 1rem;
+            color: #98fb98;
+        }
+
+        .feature-card p {
+            color: var(--cream-white);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Tip Boxes */
+        .tip-box {
+            background: linear-gradient(135deg, rgba(107, 142, 35, 0.2), rgba(152, 251, 152, 0.1));
+            border: 2px solid #6b8e23;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-friendly);
+            animation: progressBar 3s ease-in-out infinite;
+        }
+
+        @keyframes progressBar {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+
+        .tip-box h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #98fb98;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(139, 115, 85, 0.2), rgba(160, 136, 121, 0.1));
+            border: 2px solid var(--warm-chestnut);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .warning-box h4 {
+            color: #ffa500;
+            margin-bottom: 1rem;
+        }
+
+        /* Material List */
+        .material-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .material-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            border-left: 3px solid #6b8e23;
             transition: all 0.3s ease;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .material-item:hover {
+            transform: translateX(10px);
+            background: rgba(152, 251, 152, 0.1);
+            border-left-color: #98fb98;
         }
 
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--pastel-yellow) 0%, var(--pastel-peach) 100%);
+        /* Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: var(--gradient-friendly);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
         }
 
-        .info-box {
-            background: linear-gradient(135deg, var(--pastel-mint) 0%, var(--pastel-green) 100%);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-            border-left: 5px solid var(--garden-primary);
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
         }
 
-        .info-box h3 {
-            margin-bottom: 10px;
-            color: var(--text-dark);
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-glow);
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-light);
-            font-style: italic;
+        .cta-button:hover::before {
+            left: 100%;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
+            .nav-container {
+                top: 15px;
+                right: 15px;
             }
             
-            .konten-grid {
+            .nav {
+                min-width: 200px;
+                right: -20px;
+            }
+            
+            .step {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .feature-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .filter-section {
-                flex-direction: column;
-            }
-            
-            .filter-input {
-                min-width: 100%;
-            }
         }
 
-        .highlight {
-            background: var(--pastel-yellow);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        /* Special badges */
-        .badge-gwg {
-            background: var(--pastel-pink);
-            color: var(--text-dark);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 5px;
-        }
-
-        .quick-stats {
+        /* Loading Animation */
+        .loading-overlay {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--white);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            font-size: 0.9rem;
-            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-forest);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 2s ease-out 1s both;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(152, 251, 152, 0.3);
+            border-top: 4px solid #98fb98;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Team celebration */
+        .celebration {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border: 3px solid #28a745;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: #2d5016;
+            animation: celebrationPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes celebrationPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 40px rgba(40, 167, 69, 0.5);
+            }
+        }
+
+        /* Achievement badges */
+        .badge {
+            display: inline-block;
+            background: var(--gradient-friendly);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 0.5rem;
+            animation: badgeShine 2s ease-in-out infinite;
+        }
+
+        @keyframes badgeShine {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(107, 142, 35, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(152, 251, 152, 0.8);
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>gardenKeeper®</h1>
+            <p class="subtitle">Bedienungsanleitung für unser tolles Team!</p>
+            <p class="team-message">Hallo liebe Kollegen! Diese Anleitung zeigt euch, wie unser digitales Abnahmeformular funktioniert 🌱</p>
+            <a href="#schnellstart" class="cta-button">
+                <span>🚀</span>
+                Los geht's, Team!
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <span style="font-size: 2rem;">⬇️</span>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-toggle" onclick="toggleNav()">
+            <span id="nav-icon">☰</span>
+        </div>
+        <nav class="nav" id="navigationMenu">
+            <div class="nav-items">
+                <a href="#schnellstart" class="nav-item" onclick="closeNav()">🚀 Schnellstart</a>
+                <a href="#zeiten" class="nav-item" onclick="closeNav()">⏰ Arbeitszeiten</a>
+                <a href="#mitarbeiter" class="nav-item" onclick="closeNav()">👥 Team</a>
+                <a href="#material" class="nav-item" onclick="closeNav()">📦 Material</a>
+                <a href="#bilder" class="nav-item" onclick="closeNav()">📷 Bilder</a>
+                <a href="#unterschriften" class="nav-item" onclick="closeNav()">✏️ Unterschriften</a>
+                <a href="#hilfe" class="nav-item" onclick="closeNav()">💚 Hilfe</a>
+            </div>
+        </nav>
+    </div>
+
     <div class="container">
-        <header>
-            <h1>🌱 gardenKeeper® DATEV-Kontenplan</h1>
-            <div class="logo-text">"Weil Ihr Zuhause es verdient - made by gardenKeeper®"</div>
-        </header>
+        <!-- Team Greeting -->
+        <div class="team-greeting">
+            <h3>Hallo liebes gardenKeeper® Team! 👋</h3>
+            <p>Diese Anleitung zeigt euch, wie unser digitales Abnahmeformular funktioniert. Von der Zeiterfassung bis zum fertigen PDF - alles Schritt für Schritt! 💪</p>
+        </div>
 
-        <div class="content">
-            <div class="info-box">
-                <h3>📊 Ihr vollständiger DATEV-Kontenrahmen</h3>
-                <p>Komplette Übersicht aller <span class="highlight">146 Sachkonten</span> Ihrer gardenKeeper® GmbH Buchhaltung.</p>
+        <!-- Was ist das? -->
+        <section id="intro" class="section">
+            <h2 class="section-title">🌱 Was ist das gardenKeeper® Abnahmeformular?</h2>
+            
+            <div class="friendly-card">
+                <h3 style="color: #98fb98; font-size: 1.8rem; margin-bottom: 1rem;">🎯 Unser digitales Abnahmeprotokoll:</h3>
+                <p style="font-size: 1.2rem;">Das ist unser <strong>modernes, digitales System</strong> für alle Gartenpflege-Aufträge. Damit dokumentiert ihr eure Arbeit professionell und erstellt automatisch perfekte PDFs für unsere Kunden!</p>
             </div>
 
-            <div class="stats-bar">
-                <div class="stat-card">
-                    <div class="stat-number">146</div>
-                    <div class="stat-label">Konten gesamt</div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📱</span>
+                    <h3>Digital & Modern</h3>
+                    <p>Kein Papierkram mehr - alles digital und übersichtlich auf Tablet oder Handy</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">14</div>
-                    <div class="stat-label">Anlagevermögen</div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Automatisch</h3>
+                    <p>PDFs werden automatisch erstellt und gespeichert - kein manueller Aufwand</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">23</div>
-                    <div class="stat-label">Umlaufvermögen</div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Professionell</h3>
+                    <p>Saubere, einheitliche Dokumentation für alle Kunden - wir sehen super aus!</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">43</div>
-                    <div class="stat-label">Verbindlichkeiten</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">14</div>
-                    <div class="stat-label">Erlöskonten</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">45</div>
-                    <div class="stat-label">Aufwendungen</div>
+                <div class="feature-card">
+                    <span class="feature-icon">💾</span>
+                    <h3>Sicher</h3>
+                    <p>Alles wird automatisch gesichert - nie wieder Datenverlust oder verlorene Zettel</p>
                 </div>
             </div>
+        </section>
 
-            <div class="filter-section">
-                <input type="text" class="filter-input" id="searchInput" placeholder="🔍 Konto suchen (Nummer oder Bezeichnung)..." onkeyup="filterKonten()">
-                <select class="filter-select" id="klasseFilter" onchange="filterByKlasse()">
-                    <option value="">Alle Klassen</option>
-                    <option value="0">Klasse 0 - Anlagevermögen</option>
-                    <option value="1">Klasse 1 - Umlaufvermögen</option>
-                    <option value="2">Klasse 2 - Eigenkapital</option>
-                    <option value="3">Klasse 3 - Fremdkapital</option>
-                    <option value="4">Klasse 4 - Erlöse</option>
-                    <option value="5">Klasse 5 - Wareneinkauf</option>
-                    <option value="6">Klasse 6 - Aufwendungen</option>
-                    <option value="7">Klasse 7 - Weitere Erträge/Aufwend.</option>
-                    <option value="9">Klasse 9 - Vorträge</option>
-                </select>
-                <button class="btn btn-secondary" onclick="expandAll()">Alle auf-/zuklappen</button>
+        <!-- Schnellstart -->
+        <section id="schnellstart" class="section">
+            <h2 class="section-title">🚀 Schnellstart - So geht's!</h2>
+            
+            <div class="celebration">
+                <h3>In 4 einfachen Schritten zum fertigen PDF!</h3>
+                <p>Keine Sorge - das System führt euch durch jeden Schritt!</p>
             </div>
 
-            <!-- Klasse 0: Anlagevermögen -->
-            <div class="klasse-section" data-klasse="0">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>0️⃣ Anlagevermögen</span>
-                        <span class="klasse-badge">14 Konten</span>
+            <div class="step-guide">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Formular öffnen</h4>
+                        <p><strong>Link vom Chef bekommen?</strong> → Direkt öffnen<br>
+                        <strong>Oder:</strong> gardenKeeper-Link im Browser aufrufen<br>
+                        <strong>Button "Formular öffnen"</strong> drücken</p>
                     </div>
-                    <span class="toggle-icon">▼</span>
                 </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="135 edv-software">
-                        <div class="konto-nummer">135</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">EDV-Software, entgeltl. erworben</div>
-                        </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Kundendaten eingeben</h4>
+                        <p>✅ Name Kunde (Pflichtfeld!)<br>
+                        ✅ Datum (wird automatisch gesetzt)<br>
+                        📧 E-Mail (wenn bekannt)<br>
+                        🔢 LexOffice-ID (wenn vorhanden)</p>
                     </div>
-                    <div class="konto-card" data-search="390 außenanlagen">
-                        <div class="konto-nummer">390</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Außenanlagen (fremde Grst.,Geschäftsb.)</div>
-                        </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Projekt dokumentieren</h4>
+                        <p>Arbeitszeiten eintragen, Team hinzufügen, Material erfassen und Bilder hochladen. Das System speichert automatisch alles!</p>
                     </div>
-                    <div class="konto-card" data-search="400 technische anlagen">
-                        <div class="konto-nummer">400</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Technische Anlagen und Maschinen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="420 technische anlagen">
-                        <div class="konto-nummer">420</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Technische Anlagen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="440 maschinen">
-                        <div class="konto-nummer">440</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Maschinen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="520 pkw">
-                        <div class="konto-nummer">520</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Pkw</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="540 lkw">
-                        <div class="konto-nummer">540</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Lkw</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="560 transportmittel">
-                        <div class="konto-nummer">560</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Transportmittel</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="620 werkzeuge">
-                        <div class="konto-nummer">620</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Werkzeuge</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="630 betriebsausstattung">
-                        <div class="konto-nummer">630</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Betriebsausstattung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="650 büroeinrichtung">
-                        <div class="konto-nummer">650</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Büroeinrichtung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="670 gwg geringwertige">
-                        <div class="konto-nummer">670</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Geringwertige Wirtschaftsgüter <span class="badge-gwg">GWG</span></div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="690 sonstige betriebs">
-                        <div class="konto-nummer">690</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Betriebs-u.Gesch.ausstattung</div>
-                        </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Unterschriften & PDF</h4>
+                        <p>Kunde und Teamleiter unterschreiben digital. Dann "Abschließen" drücken - fertig ist das professionelle PDF!</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Klasse 1: Umlaufvermögen -->
-            <div class="klasse-section" data-klasse="1">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>1️⃣ Umlaufvermögen</span>
-                        <span class="klasse-badge">23 Konten</span>
-                    </div>
-                    <span class="toggle-icon">▼</span>
+            <div class="tip-box">
+                <h4>💡 Tipp</h4>
+                <p><strong>Wenn der Kunde neu ist, einfach den Namen eintippen - nicht aus der Liste auswählen müssen!</strong></p>
+            </div>
+        </section>
+
+        <!-- Arbeitszeiten -->
+        <section id="zeiten" class="section">
+            <h2 class="section-title">⏰ Arbeitszeiten erfassen</h2>
+            
+            <div class="friendly-card">
+                <h3 style="color: #98fb98;">Das System rechnet automatisch - ihr müsst nur die Zeiten eintragen!</h3>
+                <p>Keine komplizierten Berechnungen mehr - unser System macht das alles für euch.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🏃‍♂️</span>
+                    <h3>Ladebeginn</h3>
+                    <p>Zeit des Materialladens am Depot (z.B. 06:30)</p>
                 </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="1000 bestand roh">
-                        <div class="konto-nummer">1000</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Bestand Roh-,Hilfs- und Betriebsstoffe</div>
-                        </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚗</span>
+                    <h3>Abfahrt</h3>
+                    <p>Abfahrtszeit vom Depot zum Kunden (z.B. 07:00)</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔨</span>
+                    <h3>Arbeitsbeginn</h3>
+                    <p>Start der Arbeit beim Kunden (Standard: 06:45)</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🏁</span>
+                    <h3>Arbeitsende</h3>
+                    <p>Ende der Arbeit beim Kunden - WICHTIG für Stundenberechnung!</p>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>⏰ Zeitbeispiel</h4>
+                <p><strong>Beispiel für einen normalen Arbeitstag:</strong><br>
+                🏃‍♂️ Ladebeginn: 06:30<br>
+                🚗 Abfahrt: 07:00<br>
+                🔨 Arbeitszeit Start: 07:30<br>
+                🏁 Arbeitszeit Ende: 16:00</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>☕ Pausen richtig eintragen:</h4>
+                <p><strong>Normale Pause:</strong><br>
+                • Bis 12:00 Uhr Arbeitszeit: 15 Min<br>
+                • Über 12:00 Uhr Arbeitszeit: 45 Min<br><br>
+                <strong>Regenpause:</strong><br>
+                Nur ausfüllen wenn tatsächlich wegen Wetter pausiert wurde!</p>
+            </div>
+        </section>
+
+        <!-- Mitarbeiter -->
+        <section id="mitarbeiter" class="section">
+            <h2 class="section-title">👥 Unser Team hinzufügen</h2>
+            
+            <div class="friendly-card">
+                <h3 style="color: #98fb98;">🎯 Super einfach: Mitarbeiter aus der Liste wählen!</h3>
+                <p>Alle Kollegen sind bereits im System hinterlegt - einfach auswählen und fertig!</p>
+            </div>
+
+            <div class="step-guide">
+                <div class="step">
+                    <div class="step-number">+</div>
+                    <div class="step-content">
+                        <h4>Mitarbeiter hinzufügen</h4>
+                        <p>1. "+ Mitarbeiter hinzufügen" drücken<br>
+                        2. Aus der Liste auswählen<br>
+                        3. Fertig!</p>
                     </div>
-                    <div class="konto-card" data-search="1050 unfertige leistungen">
-                        <div class="konto-nummer">1050</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Unfertige Leistungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1180 anzahlungen vorräte">
-                        <div class="konto-nummer">1180</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Geleistete Anzahlungen auf Vorräte</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1200 forderungen lieferungen">
-                        <div class="konto-nummer">1200</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Forderungen aus L+L</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1248 pauschalwertberichtigung">
-                        <div class="konto-nummer">1248</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Pauschalwertberichtigung Forderg./b.1J</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1307 gesellschafter">
-                        <div class="konto-nummer">1307</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Forderungen gegen GmbH-Gesellschafter</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1340 personal lohn">
-                        <div class="konto-nummer">1340</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Forderg. gg. Personal Lohn- und Gehalt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1369 krankenkasse aag">
-                        <div class="konto-nummer">1369</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Forderungen ggb. Krankenkasse aus AAG</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1370 durchlaufende posten">
-                        <div class="konto-nummer">1370</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Durchlaufende Posten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1401 vorsteuer 7">
-                        <div class="konto-nummer">1401</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abziehbare Vorsteuer 7%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1402 vorsteuer eu">
-                        <div class="konto-nummer">1402</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abziehbare Vorsteuer aus EU-Erwerb</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1404 vorsteuer eu 19">
-                        <div class="konto-nummer">1404</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abziehbare Vorsteuer aus EU-Erwerb 19%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1406 vorsteuer 19">
-                        <div class="konto-nummer">1406</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abziehbare Vorsteuer 19%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1407 vorsteuer 13b">
-                        <div class="konto-nummer">1407</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abziehbare Vorsteuer § 13b UStG 19%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1420 ust vorauszahlungen">
-                        <div class="konto-nummer">1420</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Forderungen USt-Vorauszahlungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1435 gewerbesteuer">
-                        <div class="konto-nummer">1435</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Forderung aus Gewerbesteuerüberzahlung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1450 körperschaftsteuer">
-                        <div class="konto-nummer">1450</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Körperschaftsteuerrückforderung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1460 geldtransit">
-                        <div class="konto-nummer">1460</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Geldtransit</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1600 kasse">
-                        <div class="konto-nummer">1600</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Kasse</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1800 sparkasse">
-                        <div class="konto-nummer">1800</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sparkasse Saarbrücken # 67098301</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1801 sparkasse tagesgeld">
-                        <div class="konto-nummer">1801</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sparkasse Saarbrücken Tagesg. # 67099853</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1802 sparkasse zaunbau">
-                        <div class="konto-nummer">1802</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sparkasse Saarbrücken Zaunbau</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="1900 aktive rechnungsabgrenzung">
-                        <div class="konto-nummer">1900</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Aktive Rechnungsabgrenzung</div>
-                        </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">×</div>
+                    <div class="step-content">
+                        <h4>Mitarbeiter entfernen</h4>
+                        <p>"×" Button neben dem Namen drücken</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Klasse 2: Eigenkapital -->
-            <div class="klasse-section" data-klasse="2">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>2️⃣ Eigenkapital</span>
-                        <span class="klasse-badge">2 Konten</span>
-                    </div>
-                    <span class="toggle-icon">▼</span>
+            <div class="celebration">
+                <h3>👨‍🌾 Unser gardenKeeper® Team:</h3>
+                <div class="material-showcase">
+                    <div class="material-item">👨‍🌾 Christian Weinrank</div>
+                    <div class="material-item">👨‍🌾 Fabio Krämer</div>
+                    <div class="material-item">👨‍🌾 Claudiu Adascalitei</div>
+                    <div class="material-item">👨‍🌾 Jürgen Kränkel</div>
+                    <div class="material-item">👨‍🌾 Joseph Dahl</div>
+                    <div class="material-item">👨‍🌾 Christian Stöber</div>
+                    <div class="material-item">👨‍🌾 Wolfgang Degro</div>
+                    <div class="material-item">👨‍🌾 Christian Fuß</div>
+                    <div class="material-item">👨‍🌾 Christian Winterstein</div>
+                    <div class="material-item">👨‍🌾 Carsten Munz</div>
+                    <div class="material-item">👨‍🌾 Sascha Macke</div>
+                    <div class="material-item">👨‍🌾 Julina Tiedtke</div>
+                    <div class="material-item">👨‍🌾 Kim Honnecker</div>
+                    <div class="material-item">👨‍🌾 Jan Jeanrond</div>
                 </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="2900 gezeichnetes kapital">
-                        <div class="konto-nummer">2900</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gezeichnetes Kapital</div>
-                        </div>
+                <div class="badge">👥 Team-Koordinator</div>
+            </div>
+        </section>
+
+        <!-- Material & Maschinen -->
+        <section id="material" class="section">
+            <h2 class="section-title">📦 Materialien & Maschinen</h2>
+            
+            <div class="celebration">
+                <h3>Alles was ihr braucht ist in der Liste!</h3>
+                <p>Material auswählen, Menge eingeben - das System macht den Rest!</p>
+            </div>
+
+            <div class="step-guide">
+                <div class="step">
+                    <div class="step-number">📦</div>
+                    <div class="step-content">
+                        <h4>Material hinzufügen</h4>
+                        <p>1. "+ Material hinzufügen" Button<br>
+                        2. Material aus Liste wählen (z.B. "Entsorgung Grünschnitt")<br>
+                        3. Menge eingeben (z.B. 5 cbm)<br>
+                        4. Bei Fremdeinkauf: ✅ Checkbox aktivieren</p>
                     </div>
-                    <div class="konto-card" data-search="2970 gewinnvortrag">
-                        <div class="konto-nummer">2970</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gewinnvortrag vor Verwendung</div>
-                        </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">🔧</div>
+                    <div class="step-content">
+                        <h4>Maschinen dokumentieren</h4>
+                        <p>1. "+ Maschine hinzufügen" Button<br>
+                        2. Maschine auswählen (z.B. "Häcksler")<br>
+                        3. Einsatzzeit eingeben (z.B. 3 Std.)</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Klasse 3: Fremdkapital -->
-            <div class="klasse-section" data-klasse="3">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>3️⃣ Fremdkapital/Verbindlichkeiten</span>
-                        <span class="klasse-badge">53 Konten</span>
-                    </div>
-                    <span class="toggle-icon">▼</span>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🌿</span>
+                    <h3>Häufige Materialien</h3>
+                    <p>Entsorgung Grünschnitt, Rindenmulch, Pinienrinde, Gärtnererde, Mutterboden</p>
                 </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="3035 gewerbesteuer rückstellung">
-                        <div class="konto-nummer">3035</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gewerbesteuerrückstellung § 4 (5b) EStG</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3040 körperschaftsteuer rückstellung">
-                        <div class="konto-nummer">3040</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Körperschaftsteuerrückstellung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3070 arbeitszeitkonten">
-                        <div class="konto-nummer">3070</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Rückstellung für Arbeitszeitkonten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3071 sonstige rückstellungen">
-                        <div class="konto-nummer">3071</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Rückstellungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3074 personalkosten">
-                        <div class="konto-nummer">3074</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Rückstellungen für Personalkosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3090 gewährleistungen">
-                        <div class="konto-nummer">3090</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Rückstellungen f. Gewährleistungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3095 abschluss prüfung">
-                        <div class="konto-nummer">3095</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Rückstellungen für Abschluss u. Prüfung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3096 aufbewahrungspflicht">
-                        <div class="konto-nummer">3096</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Rückstellungen für Aufbewahrungspflicht</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3161 psa bank boxer">
-                        <div class="konto-nummer">3161</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">PSA Bank, Peugeot Boxer SB-SK1070</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3162 finanzierung peugeot 5008">
-                        <div class="konto-nummer">3162</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Finanzierung Peugeot 5008 SB-JS5008</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3163 psa bank citroen">
-                        <div class="konto-nummer">3163</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">PSA Bank, Finanzierung Citroen Jumper</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3168 deutsche leasing">
-                        <div class="konto-nummer">3168</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Deutsche Leasing Gartengeräte</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3210 darlehen psa citroen">
-                        <div class="konto-nummer">3210</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. PSA Bank Citroen Jumper SB-SK 2090</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3211 darlehen boxer kipper">
-                        <div class="konto-nummer">3211</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. PSA Bank Boxer Kipper SB-SK 1030</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3212 kfw darlehen">
-                        <div class="konto-nummer">3212</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Kfw-Darlehen Grenke #300266795</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3213 darlehen kipper">
-                        <div class="konto-nummer">3213</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. PSA Bank Kipper SB-SK 270</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3214 sparkasse darlehen">
-                        <div class="konto-nummer">3214</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. Spk. Sbr. #6740990889</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3215 sparkasse darlehen">
-                        <div class="konto-nummer">3215</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. Spk. Sbr. #6741208851</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3216 psa bank boxer">
-                        <div class="konto-nummer">3216</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot Boxer SB-SK 1070</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3217 psa bank 208">
-                        <div class="konto-nummer">3217</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot 208 SB-FK 1910</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3218 psa bank boxer">
-                        <div class="konto-nummer">3218</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot Boxer SB-SK 1080</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3219 psa bank traveller">
-                        <div class="konto-nummer">3219</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darl. PSA Bank Peugeot Trav. SB-SJ 486</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3272 erhaltene anzahlungen">
-                        <div class="konto-nummer">3272</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erhaltene Anzahlungen 19% USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3280 erhaltene anzahlungen">
-                        <div class="konto-nummer">3280</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erhaltene Anzahlungen (bis 1 Jahr)</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3300 verbindlichkeiten lieferungen">
-                        <div class="konto-nummer">3300</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichkeiten aus Lieferungen+Leist.</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3500 sonstige verbindlichkeiten">
-                        <div class="konto-nummer">3500</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Verbindlichkeiten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3515 gesellschafter jessika">
-                        <div class="konto-nummer">3515</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Vb.gg. Gesellschaftern Jessika Krämer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3562 psa bank active">
-                        <div class="konto-nummer">3562</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">PSA Bank, Finanzierung Actice Pack</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3563 finanzierung boxer">
-                        <div class="konto-nummer">3563</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Finanzierung PSA Bank Peugeot Boxer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3564 darlehen partner">
-                        <div class="konto-nummer">3564</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Darlehen PSA Bank Peugeot Partner</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3570 mietkauf arbeitsbühne">
-                        <div class="konto-nummer">3570</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf abfinance GmbH Arbeitsbühne</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3571 mietkauf deutsche leasing">
-                        <div class="konto-nummer">3571</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf Deutsche Leasing Gartengeräte</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3572 mietkauf terrax">
-                        <div class="konto-nummer">3572</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf Deutsche Leasing Huco Terrax</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3573 mietkauf dreiseitenkipper">
-                        <div class="konto-nummer">3573</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf abcfinance GmbH Dreis.kipper</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3574 mietkauf ford ranger">
-                        <div class="konto-nummer">3574</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf abcfinance GmbH Ford Ranger</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3575 mietkauf kompaktlader">
-                        <div class="konto-nummer">3575</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf Vermeer Finace Kompaktlader</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3576 mietkauf renault traffic">
-                        <div class="konto-nummer">3576</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf abcfinance Renault Traffic</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3577 mietkauf teleskoplader">
-                        <div class="konto-nummer">3577</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf dll financial Teleskoplader</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3578 mietkauf renault">
-                        <div class="konto-nummer">3578</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf abcfinance Renault Traffic</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3579 finanzierung minibagger">
-                        <div class="konto-nummer">3579</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Finanzierung CAT Financial Minibagger</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3580 mietkauf ford transit">
-                        <div class="konto-nummer">3580</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf abcfinance Ford Transit</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3581 mietkauf ford ranger">
-                        <div class="konto-nummer">3581</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietkauf abcfinance Ford Ranger</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3582 finanzierung holzhäcksler">
-                        <div class="konto-nummer">3582</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">De Lage Finanzierung Holzhäcksler</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3610 kreditkartenabrechnung">
-                        <div class="konto-nummer">3610</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Kreditkartenabrechnung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3695 verrechnung anzahlungen">
-                        <div class="konto-nummer">3695</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verrechnung geleistete Anzahlungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3720 verbindlichkeiten lohn">
-                        <div class="konto-nummer">3720</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichkeiten aus Lohn und Gehalt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3721 offene löhne">
-                        <div class="konto-nummer">3721</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Offene Löhne 2020, 2021 und 2022</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3725 einbehaltung arbeitnehmer">
-                        <div class="konto-nummer">3725</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichk. Einbehaltung Arbeitnehmer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3730 lohnsteuer kirchensteuer">
-                        <div class="konto-nummer">3730</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichk. Lohn- und Kirchensteuer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3740 sozialversicherung">
-                        <div class="konto-nummer">3740</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Voraus.Beitrag ggb. Sozialversicherung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3742 arbeitszeitkonto">
-                        <div class="konto-nummer">3742</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichkeiten Arbeitszeitkonto</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3743 soziale sicherheit">
-                        <div class="konto-nummer">3743</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichkeiten soziale Sicherheit</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3759 soziale sicherheit">
-                        <div class="konto-nummer">3759</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichkeiten soziale Sicherheit</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3770 vermögensbildung">
-                        <div class="konto-nummer">3770</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichkeiten a. Vermögensbildung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3790 lohn gehaltsverrechnungen">
-                        <div class="konto-nummer">3790</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Lohn- und Gehaltsverrechnungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3801 umsatzsteuer 7">
-                        <div class="konto-nummer">3801</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer 7%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3802 umsatzsteuer eu">
-                        <div class="konto-nummer">3802</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer aus EU-Erwerb</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3804 umsatzsteuer eu 19">
-                        <div class="konto-nummer">3804</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer aus EU-Erwerb 19%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3806 umsatzsteuer 19">
-                        <div class="konto-nummer">3806</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer 19%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3818 ust eu-land">
-                        <div class="konto-nummer">3818</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">USt im anderen EU-Land s.Leist./Werkl.</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3820 umsatzsteuer vorauszahlungen">
-                        <div class="konto-nummer">3820</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer-Vorauszahlungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3830 umsatzsteuer 1/11">
-                        <div class="konto-nummer">3830</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer-Vorauszahlungen 1/11</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3837 umsatzsteuer 13b">
-                        <div class="konto-nummer">3837</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer nach § 13b UStG 19%</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3841 umsatzsteuer vorjahr">
-                        <div class="konto-nummer">3841</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer Vorjahr</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3845 umsatzsteuer frühere">
-                        <div class="konto-nummer">3845</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Umsatzsteuer frühere Jahre</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="3860 verbindlichkeiten ust">
-                        <div class="konto-nummer">3860</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verbindlichkeiten aus Umsatzsteuer-VZ</div>
-                        </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚜</span>
+                    <h3>Unsere Maschinen</h3>
+                    <p>Häcksler, Kompaktlader Vermeer, Minibagger Kubota, Großflächen-Aufsitzmäher</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🏪</span>
+                    <h3>Fremdeinkauf</h3>
+                    <p>Bei Baumarkt-Einkäufen einfach die Checkbox aktivieren und Lieferanten angeben</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Automatisch</h3>
+                    <p>Alle Mengen werden automatisch summiert und im PDF übersichtlich dargestellt</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bilder -->
+        <section id="bilder" class="section">
+            <h2 class="section-title">📷 Projekt-Bilder</h2>
+            
+            <div class="friendly-card">
+                <h3 style="color: #98fb98;">📸 Ein Bild sagt mehr als tausend Worte!</h3>
+                <p>Zeigt unseren Kunden, wie toll eure Arbeit ist - mit professionellen Projekt-Bildern.</p>
+            </div>
+
+            <div class="step-guide">
+                <div class="step">
+                    <div class="step-number">📷</div>
+                    <div class="step-content">
+                        <h4>Bilder hochladen</h4>
+                        <p>1. Auf den Upload-Bereich tippen<br>
+                        2. Bilder aus Galerie wählen oder neue Fotos machen<br>
+                        3. Kategorie wird automatisch erkannt</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">🎨</div>
+                    <div class="step-content">
+                        <h4>Bild-Kategorien</h4>
+                        <p><strong>Vorher:</strong> Ausgangszustand<br>
+                        <strong>Arbeitsfortschritt:</strong> Zwischenstände<br>
+                        <strong>Nachher:</strong> Fertiges Ergebnis<br>
+                        <strong>Details:</strong> Besondere Arbeitsschritte</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Klasse 4: Erlöse -->
-            <div class="klasse-section" data-klasse="4">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>4️⃣ Betriebliche Erträge</span>
-                        <span class="klasse-badge">14 Konten</span>
+            <div class="tip-box">
+                <h4>📸 Foto-Tipps für Profis</h4>
+                <p>• Gute Belichtung verwenden<br>
+                • Mehrere Blickwinkel fotografieren<br>
+                • Vorher-Nachher-Vergleiche sind super!<br>
+                • Bei Details nah rangehen</p>
+            </div>
+        </section>
+
+        <!-- Unterschriften -->
+        <section id="unterschriften" class="section">
+            <h2 class="section-title">✏️ Digitale Unterschriften</h2>
+            
+            <div class="friendly-card">
+                <h3 style="color: #98fb98;">✨ Professionell digital unterschreiben!</h3>
+                <p>Kunde und Teamleiter unterschreiben direkt auf dem Tablet - modernste Technik für professionelle Abnahme.</p>
+            </div>
+
+            <div class="step-guide">
+                <div class="step">
+                    <div class="step-number">👤</div>
+                    <div class="step-content">
+                        <h4>Kunde unterschreibt</h4>
+                        <p>1. Unterschriftfeld "Kunde" antippen<br>
+                        2. Mit Finger oder Stylus unterschreiben<br>
+                        3. "Speichern" drücken</p>
                     </div>
-                    <span class="toggle-icon">▼</span>
                 </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="4200 erlöse">
-                        <div class="konto-nummer">4200</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erlöse</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4300 erlöse 7">
-                        <div class="konto-nummer">4300</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erlöse 7% USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4320 eu-land lieferungen">
-                        <div class="konto-nummer">4320</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erl.a.im and.EU-Land stpfl.Lieferungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4339 nicht steuerbare">
-                        <div class="konto-nummer">4339</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Nicht steuerbare Umsätze EU-Land</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4400 erlöse 19">
-                        <div class="konto-nummer">4400</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erlöse 19% USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4402 erlöse 19">
-                        <div class="konto-nummer">4402</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erlöse 19% USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4410 erlöse 19">
-                        <div class="konto-nummer">4410</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erlöse 19% USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4730 gewährte skonti">
-                        <div class="konto-nummer">4730</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gewährte Skonti</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4736 skonti 19">
-                        <div class="konto-nummer">4736</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gewährte Skonti 19 % USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4830 sonstige betriebliche">
-                        <div class="konto-nummer">4830</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige betriebliche Erträge</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4839 erträge unregelmäßig">
-                        <div class="konto-nummer">4839</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Erträge unregelmäßig</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4946 sachbezüge">
-                        <div class="konto-nummer">4946</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verrechnete sonstige Sachbezüge</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4947 sachbezüge fahrzeug">
-                        <div class="konto-nummer">4947</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verrech. sonstige Sachbezüge Fzg 19% USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4949 sachbezüge ohne ust">
-                        <div class="konto-nummer">4949</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verrechn. sonstige Sachbezüge ohne USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="4972 erstattungen aag">
-                        <div class="konto-nummer">4972</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erstattungen AufwendungsausgleichsG</div>
-                        </div>
+
+                <div class="step">
+                    <div class="step-number">👨‍🌾</div>
+                    <div class="step-content">
+                        <h4>Teamleiter unterschreibt</h4>
+                        <p>1. Unterschriftfeld "Teamleiter" antippen<br>
+                        2. Mit Finger oder Stylus unterschreiben<br>
+                        3. "Speichern" drücken</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Klasse 5: Wareneinkauf -->
-            <div class="klasse-section" data-klasse="5">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>5️⃣ Material- und Wareneinkauf</span>
-                        <span class="klasse-badge">7 Konten</span>
+            <div class="tip-box">
+                <h4>✏️ Unterschrift-Tipps</h4>
+                <p>• Langsam und deutlich unterschreiben<br>
+                • Bei kleinen Bildschirmen Gerät drehen<br>
+                • Unterschrift sollte gut lesbar sein<br>
+                • Bei Fehlern einfach "Löschen" und neu versuchen</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Wichtig</h4>
+                <p>Die digitalen Unterschriften bestätigen die ordnungsgemäße Ausführung der Arbeiten und haben rechtliche Bedeutung!</p>
+            </div>
+        </section>
+
+        <!-- Projekt abschließen -->
+        <section id="abschluss" class="section">
+            <h2 class="section-title">✅ Projekt abschließen</h2>
+            
+            <div class="celebration">
+                <h3>🎉 Fast geschafft - jetzt das Projekt abschließen!</h3>
+                <p>Bestätigungen aktivieren und automatisch das professionelle PDF erstellen lassen.</p>
+            </div>
+
+            <div class="step-guide">
+                <div class="step">
+                    <div class="step-number">✅</div>
+                    <div class="step-content">
+                        <h4>Bestätigungen aktivieren</h4>
+                        <p>• Arbeiten gemäß Auftrag ausgeführt<br>
+                        • Komplett abgeschlossen<br>
+                        • Ordnungsgemäß und mängelfrei<br>
+                        • Kunde ist zufrieden<br>
+                        • Arbeitsplatz ordentlich hinterlassen</p>
                     </div>
-                    <span class="toggle-icon">▼</span>
                 </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="5200 wareneingang">
-                        <div class="konto-nummer">5200</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Wareneingang</div>
-                        </div>
+
+                <div class="step">
+                    <div class="step-number">📝</div>
+                    <div class="step-content">
+                        <h4>Bemerkungen ergänzen</h4>
+                        <p>Wichtige Hinweise oder Besonderheiten zum Projekt in das Bemerkungsfeld eintragen.</p>
                     </div>
-                    <div class="konto-card" data-search="5300 wareneingang 7">
-                        <div class="konto-nummer">5300</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Wareneingang 7% Vorsteuer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="5400 wareneingang 19">
-                        <div class="konto-nummer">5400</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Wareneingang 19% Vorsteuer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="5420 eu-erwerb 7">
-                        <div class="konto-nummer">5420</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">EU-Erwerb 7% Vorst./USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="5425 eu-erwerb 19">
-                        <div class="konto-nummer">5425</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">EU-Erwerb 19% Vorst./USt</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="5736 erhaltene skonti">
-                        <div class="konto-nummer">5736</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Erhaltene Skonti 19% Vorsteuer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="5800 bezugsnebenkosten">
-                        <div class="konto-nummer">5800</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Bezugsnebenkosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="5900 fremdleistungen">
-                        <div class="konto-nummer">5900</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Fremdleistungen</div>
-                        </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">🚀</div>
+                    <div class="step-content">
+                        <h4>Abschließen</h4>
+                        <p>"Abschließen" Button drücken - das System erstellt automatisch das PDF und speichert alles!</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Klasse 6: Betriebliche Aufwendungen -->
-            <div class="klasse-section" data-klasse="6">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>6️⃣ Betriebliche Aufwendungen</span>
-                        <span class="klasse-badge">61 Konten</span>
-                    </div>
-                    <span class="toggle-icon">▼</span>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📄</span>
+                    <h3>PDF-Erstellung</h3>
+                    <p>Automatische Generierung eines professionellen Abnahmeprotokolls</p>
                 </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="6010 löhne">
-                        <div class="konto-nummer">6010</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Löhne</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6020 gehälter">
-                        <div class="konto-nummer">6020</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gehälter</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6024 geschäftsführergehälter">
-                        <div class="konto-nummer">6024</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Geschäftsführergehälter GmbH-Gesells.</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6035 minijobs">
-                        <div class="konto-nummer">6035</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Löhne für Minijobs</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6036 pauschale steuer minijobber">
-                        <div class="konto-nummer">6036</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Pauschale Steuer für Minijobber</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6037 pauschale steuer gesellschafter">
-                        <div class="konto-nummer">6037</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Pauschale Steuer für Gesellschafter-GF</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6060 freiwillige soziale">
-                        <div class="konto-nummer">6060</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Freiwillige soziale Aufwendung. LSt-pfl.</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6066 zuwendungen minijobber">
-                        <div class="konto-nummer">6066</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Freiwillige Zuwendungen an Minijobber</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6069 pauschale steuer bezüge">
-                        <div class="konto-nummer">6069</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Pauschale Steuer auf sonstige Bezüge</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6072 sachzuwendungen an">
-                        <div class="konto-nummer">6072</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sachzuwendungen und Dienstleistg. an AN</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6073 sachzuwendungen gesellschafter">
-                        <div class="konto-nummer">6073</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sachzuwend., Dienstleistungen Ges.er-GF</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6110 gesetzliche sozialaufwendungen">
-                        <div class="konto-nummer">6110</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gesetzliche Sozialaufwendungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6120 berufsgenossenschaft">
-                        <div class="konto-nummer">6120</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Beiträge zur Berufsgenossenschaft</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6130 freiwillige soziale lst-frei">
-                        <div class="konto-nummer">6130</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Freiwillige soziale Aufwendung. LSt-frei</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6150 versorgungskassen">
-                        <div class="konto-nummer">6150</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Versorgungskassen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6170 sonstige soziale abgaben">
-                        <div class="konto-nummer">6170</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige soziale Abgaben</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6171 soziale abgaben minijobber">
-                        <div class="konto-nummer">6171</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Soziale Abgaben für Minijobber</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6200 abschreibung immaterielle">
-                        <div class="konto-nummer">6200</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abschreibung immaterielle VermG</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6220 abschreibungen sachanlagen">
-                        <div class="konto-nummer">6220</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abschreibungen auf Sachanlagen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6221 abschreibungen gebäude">
-                        <div class="konto-nummer">6221</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abschreibungen auf Gebäude</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6222 abschreibungen fahrzeuge">
-                        <div class="konto-nummer">6222</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abschreibungen auf Fahrzeuge</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6260 sofortabschreibung gwg">
-                        <div class="konto-nummer">6260</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sofortabschreibung GWG</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6262 abschreibungen aktivierte gwg">
-                        <div class="konto-nummer">6262</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abschreibungen auf aktivierte GWG</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6300 sonstige betriebliche">
-                        <div class="konto-nummer">6300</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige betriebliche Aufwendungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6303 fremdleistungen fremdarbeiten">
-                        <div class="konto-nummer">6303</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Fremdleistungen und Fremdarbeiten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6310 miete unbewegliche">
-                        <div class="konto-nummer">6310</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Miete, unbewegliche Wirtschaftsgüter</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6330 reinigung">
-                        <div class="konto-nummer">6330</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Reinigung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6335 instandhaltung räume">
-                        <div class="konto-nummer">6335</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Instandhaltung betrieblicher Räume</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6400 versicherungen">
-                        <div class="konto-nummer">6400</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Versicherungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6420 beiträge">
-                        <div class="konto-nummer">6420</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Beiträge</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6430 sonstige abgaben">
-                        <div class="konto-nummer">6430</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Abgaben</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6436 verspätungszuschlag">
-                        <div class="konto-nummer">6436</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abzugsf.Verspätungszuschlag/Zwangsgeld</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6450 reparatur bauten">
-                        <div class="konto-nummer">6450</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Reparatur u.Instandhaltung von Bauten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6460 reparatur anlagen">
-                        <div class="konto-nummer">6460</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Reparatur/Instandh. Anlagen u. Maschinen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6470 reparatur bga">
-                        <div class="konto-nummer">6470</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Reparatur/Instandh.v.and.Anlagen u. BGA</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6490 sonstige reparaturen">
-                        <div class="konto-nummer">6490</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Reparaturen u.Instandhaltungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6495 wartungskosten">
-                        <div class="konto-nummer">6495</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Wartungskosten für Hard- und Software</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6520 fahrzeug versicherungen">
-                        <div class="konto-nummer">6520</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Fahrzeug-Versicherungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6530 laufende fahrzeug">
-                        <div class="konto-nummer">6530</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Laufende Fahrzeug-Betriebskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6540 fahrzeug reparaturen">
-                        <div class="konto-nummer">6540</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Fahrzeug-Reparaturen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6560 mietleasing kfz">
-                        <div class="konto-nummer">6560</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietleasing Kfz</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6561">
-                        <div class="konto-nummer">6561</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">[Konto 6561]</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6570 sonstige fahrzeugkosten">
-                        <div class="konto-nummer">6570</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstige Fahrzeugkosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6580 mautgebühren">
-                        <div class="konto-nummer">6580</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mautgebühren</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6600 werbekosten">
-                        <div class="konto-nummer">6600</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Werbekosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6601 messestand">
-                        <div class="konto-nummer">6601</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Messestand</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6605 streuartikel">
-                        <div class="konto-nummer">6605</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Streuartikel</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6630 repräsentationskosten">
-                        <div class="konto-nummer">6630</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Repräsentationskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6631 bewirtung intern">
-                        <div class="konto-nummer">6631</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Bewirtung intern</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6632 dekoration">
-                        <div class="konto-nummer">6632</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Dekoration</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6640 bewirtungskosten">
-                        <div class="konto-nummer">6640</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Bewirtungskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6643 aufmerksamkeiten">
-                        <div class="konto-nummer">6643</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Aufmerksamkeiten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6644 nicht abzugsfähige bewirtung">
-                        <div class="konto-nummer">6644</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Nicht abzugsfähige Bewirtungskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6645 nicht abzugsfähige betriebsausgaben">
-                        <div class="konto-nummer">6645</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Nicht abzugsfähige Betriebsausgaben</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6650 reisekosten arbeitnehmer">
-                        <div class="konto-nummer">6650</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Reisekosten Arbeitnehmer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6660 reisekosten übernachtung">
-                        <div class="konto-nummer">6660</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Reisekosten AN Übernachtungsaufwand</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6664 reisekosten verpflegung">
-                        <div class="konto-nummer">6664</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Reisekosten AN Verpfleg.mehraufwand</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6710 verpackungsmaterial">
-                        <div class="konto-nummer">6710</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Verpackungsmaterial</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6800 porto">
-                        <div class="konto-nummer">6800</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Porto</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6805 telefon">
-                        <div class="konto-nummer">6805</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Telefon</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6810 internetkosten">
-                        <div class="konto-nummer">6810</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Internetkosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6815 bürobedarf">
-                        <div class="konto-nummer">6815</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Bürobedarf</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6820 zeitschriften bücher">
-                        <div class="konto-nummer">6820</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Zeitschrift./Bücher/dig.Medien(Fachlit.)</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6821 fortbildungskosten">
-                        <div class="konto-nummer">6821</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Fortbildungskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6822 freiwillige sozialleistungen">
-                        <div class="konto-nummer">6822</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Freiwillige Sozialleistungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6825 rechts beratungskosten">
-                        <div class="konto-nummer">6825</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Rechts- und Beratungskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6827 abschluss prüfungskosten">
-                        <div class="konto-nummer">6827</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Abschluss- und Prüfungskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6830 buchführungskosten">
-                        <div class="konto-nummer">6830</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Buchführungskosten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6835 mieten einrichtungen">
-                        <div class="konto-nummer">6835</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mieten für Einrichtungen bewegliche WG</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6837 lizenzen konzessionen">
-                        <div class="konto-nummer">6837</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Aufwendungen für Lizenzen, Konzessionen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6840 mlf mercator">
-                        <div class="konto-nummer">6840</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">MLF Mercator-Leasing</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6841 miete bewegliche">
-                        <div class="konto-nummer">6841</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Miete bewegliche Wirtschaftsgüter</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6842 grenke leasing">
-                        <div class="konto-nummer">6842</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Grenke Leasing</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6844 mietleasing targo">
-                        <div class="konto-nummer">6844</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Mietleasing TARGO Bank, iPhone</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6845 werkzeuge kleingeräte">
-                        <div class="konto-nummer">6845</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Werkzeuge und Kleingeräte</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6850 sonstiger betriebsbedarf">
-                        <div class="konto-nummer">6850</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Sonstiger Betriebsbedarf</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6851 berufsbekleidung">
-                        <div class="konto-nummer">6851</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Berufsbekleidung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6855 nebenkosten geldverkehr">
-                        <div class="konto-nummer">6855</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Nebenkosten des Geldverkehrs</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6859 abraum abfallbeseitigung">
-                        <div class="konto-nummer">6859</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Aufwand Abraum-/Abfallbeseitigung</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6880 währungsumrechnungen">
-                        <div class="konto-nummer">6880</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Aufwendungen aus Währungsumrechnungen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="6960 periodenfremde aufwendungen">
-                        <div class="konto-nummer">6960</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Periodenfremde Aufwendungen</div>
-                        </div>
+                <div class="feature-card">
+                    <span class="feature-icon">☁️</span>
+                    <h3>Cloud-Speicherung</h3>
+                    <p>Sicherung in Google Drive und Archivierung in Google Sheets</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📧</span>
+                    <h3>Email-Versand</h3>
+                    <p>Automatische Benachrichtigung des Büro-Teams über Projektabschluss</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔄</span>
+                    <h3>Bereit für Neues</h3>
+                    <p>Formular kann für das nächste Projekt zurückgesetzt werden</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hilfe -->
+        <section id="hilfe" class="section">
+            <h2 class="section-title">💚 Hilfe & Support</h2>
+            
+            <div class="team-greeting">
+                <h3>🔧 Probleme? Haben wir Lösungen!</h3>
+                <p>Hier sind die Antworten auf die häufigsten Fragen!</p>
+            </div>
+
+            <div class="step-guide">
+                <div class="step">
+                    <div class="step-number">?</div>
+                    <div class="step-content">
+                        <h4>"Das Formular lädt nicht"</h4>
+                        <p>1. Internet-Verbindung prüfen<br>
+                        2. Browser neu laden (F5)<br>
+                        3. Anderen Browser probieren (Chrome empfohlen)</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">?</div>
+                    <div class="step-content">
+                        <h4>"PDF wird nicht erstellt"</h4>
+                        <p>1. Popup-Blocker ausschalten<br>
+                        2. "PDF" Button nochmal drücken<br>
+                        3. Alternativ: "HTML Download" verwenden</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">?</div>
+                    <div class="step-content">
+                        <h4>"Daten sind weg"</h4>
+                        <p>1. "Speichern" Button regelmäßig drücken<br>
+                        2. Browser speichert automatisch Zwischenstände<br>
+                        3. Bei Problemen: Chef anrufen</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">?</div>
+                    <div class="step-content">
+                        <h4>"Kunde ist nicht in der Liste"</h4>
+                        <p>Kein Problem! Einfach den Namen direkt eintippen. Das System erkennt automatisch neue Kunden.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Klasse 7: Weitere Erträge und Aufwendungen -->
-            <div class="klasse-section" data-klasse="7">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>7️⃣ Weitere Erträge und Aufwendungen</span>
-                        <span class="klasse-badge">6 Konten</span>
-                    </div>
-                    <span class="toggle-icon">▼</span>
-                </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="7310 zinsaufwendungen kurzfristig">
-                        <div class="konto-nummer">7310</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Zinsaufwendungen f.kfr.Verbindlichkeit.</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="7320 zinsaufwendungen langfristig">
-                        <div class="konto-nummer">7320</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Zinsaufwendungen f.lfr.Verbindlichkeit.</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="7326 zinsen finanzierung">
-                        <div class="konto-nummer">7326</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Zinsen zur Finanzierung Anlagevermögen</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="7355 kreditprovision">
-                        <div class="konto-nummer">7355</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Kreditprovision,Verwaltungskostenbeitr.</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="7600 körperschaftsteuer">
-                        <div class="konto-nummer">7600</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Körperschaftsteuer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="7608 solidaritätszuschlag">
-                        <div class="konto-nummer">7608</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Solidaritätszuschlag</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="7610 gewerbesteuer">
-                        <div class="konto-nummer">7610</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Gewerbesteuer</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="7685 kfz-steuern">
-                        <div class="konto-nummer">7685</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Kfz-Steuern</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="friendly-card">
+                <h4 style="color: #98fb98;">📞 Bei Fragen sind wir da:</h4>
+                <p style="font-size: 1.2rem;"><strong>📞 Jessika:</strong> Technische Probleme<br>
+                <strong>📞 Sven:</strong> Auftrags-Fragen<br>
+                <strong>📞 0681 93784009</strong><br><br>
+                Wir sind ein Team und helfen uns gegenseitig! 🤝</p>
             </div>
+        </section>
 
-            <!-- Klasse 9: Vorträge -->
-            <div class="klasse-section" data-klasse="9">
-                <div class="klasse-header" onclick="toggleKlasse(this)">
-                    <div class="klasse-title">
-                        <span>9️⃣ Saldenvorträge</span>
-                        <span class="klasse-badge">3 Konten</span>
-                    </div>
-                    <span class="toggle-icon">▼</span>
-                </div>
-                <div class="konten-grid">
-                    <div class="konto-card" data-search="9000 saldenvorträge sachkonten">
-                        <div class="konto-nummer">9000</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Saldenvorträge Sachkonten</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="9008 saldenvorträge debitoren">
-                        <div class="konto-nummer">9008</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Saldenvorträge Debitoren</div>
-                        </div>
-                    </div>
-                    <div class="konto-card" data-search="9009 saldenvorträge kreditoren">
-                        <div class="konto-nummer">9009</div>
-                        <div class="konto-info">
-                            <div class="konto-bezeichnung">Saldenvorträge Kreditoren</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="export-buttons">
-                <button class="btn" onclick="exportKontenplan()">📥 Kontenplan exportieren (Excel)</button>
-                <button class="btn btn-secondary" onclick="printKontenplan()">🖨️ Drucken</button>
-                <button class="btn btn-secondary" onclick="copyAllKonten()">📋 Alle kopieren</button>
-            </div>
-
-            <div class="info-box">
-                <h3>📌 Zusammenfassung Ihrer Kontenstruktur</h3>
-                <p>Ihr DATEV-Kontenrahmen für die <strong>gardenKeeper® GmbH</strong> umfasst insgesamt <span class="highlight">146 Sachkonten</span> 
-                mit Schwerpunkt auf:</p>
-                <ul style="list-style: none; padding-left: 0;">
-                    <li>✅ <strong>Umfangreiche Fahrzeugfinanzierungen</strong> (PSA Bank, abcfinance, etc.)</li>
-                    <li>✅ <strong>Diverse Leasingverträge</strong> (Grenke, Deutsche Leasing, Mercator)</li>
-                    <li>✅ <strong>Detaillierte Personalkonten</strong> (inkl. Minijobs und Gesellschafter-GF)</li>
-                    <li>✅ <strong>Vollständige Umsatzsteuer-Konten</strong> (inkl. EU und §13b UStG)</li>
-                    <li>✅ <strong>Spezielle Gartengeräte-Finanzierungen</strong> (passend zum Geschäftsbereich)</li>
-                </ul>
+        <!-- Abschluss -->
+        <div class="celebration" style="margin-top: 4rem;">
+            <h2>🌱 gardenKeeper® - Einfach. Professionell. Digital. 🌱</h2>
+            <p><strong>"Weil Ihr Zuhause es verdient - made by gardenKeeper®"</strong></p>
+            <p>Unser Team macht jeden Garten zu einem Paradies - jetzt auch mit modernster Technik! 🎉</p>
+            <div style="margin-top: 2rem;">
+                <span class="badge">🌱 gardenKeeper-Profi</span>
+                <span class="badge">📱 Digital-Experte</span>
+                <span class="badge">⚡ Effizienz-Champion</span>
+                <span class="badge">🎯 Qualitäts-Meister</span>
+                <span class="badge">💪 Team-Player</span>
             </div>
         </div>
     </div>
 
-    <div class="quick-stats">
-        <strong>Gefilterte Konten:</strong> <span id="filteredCount">146</span> / 146
-    </div>
-
     <script>
-        function toggleKlasse(header) {
-            const section = header.parentElement;
-            section.classList.toggle('active');
+        // Toggle navigation menu
+        function toggleNav() {
+            const nav = document.getElementById('navigationMenu');
+            const icon = document.getElementById('nav-icon');
+            
+            nav.classList.toggle('open');
+            
+            if (nav.classList.contains('open')) {
+                icon.textContent = '✕';
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.textContent = '☰';
+                icon.style.transform = 'rotate(0deg)';
+            }
         }
 
-        function expandAll() {
-            const sections = document.querySelectorAll('.klasse-section');
-            const allActive = Array.from(sections).every(s => s.classList.contains('active'));
+        // Close navigation menu
+        function closeNav() {
+            const nav = document.getElementById('navigationMenu');
+            const icon = document.getElementById('nav-icon');
             
-            sections.forEach(section => {
-                if (allActive) {
-                    section.classList.remove('active');
-                } else {
-                    section.classList.add('active');
-                }
+            nav.classList.remove('open');
+            icon.textContent = '☰';
+            icon.style.transform = 'rotate(0deg)';
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navContainer = document.querySelector('.nav-container');
+            const nav = document.getElementById('navigationMenu');
+            
+            if (!navContainer.contains(event.target) && nav.classList.contains('open')) {
+                closeNav();
+            }
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Intersection Observer for animations
+        function setupScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
             });
         }
 
-        function filterKonten() {
-            const searchValue = document.getElementById('searchInput').value.toLowerCase();
-            const klasseValue = document.getElementById('klasseFilter').value;
-            const cards = document.querySelectorAll('.konto-card');
-            let visibleCount = 0;
-            
-            cards.forEach(card => {
-                const searchText = card.getAttribute('data-search');
-                const parentKlasse = card.closest('.klasse-section').getAttribute('data-klasse');
-                
-                const matchesSearch = !searchValue || searchText.includes(searchValue);
-                const matchesKlasse = !klasseValue || parentKlasse === klasseValue;
-                
-                if (matchesSearch && matchesKlasse) {
-                    card.style.display = '';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            
-            // Update counter
-            document.getElementById('filteredCount').textContent = visibleCount;
-            
-            // Auto-expand sections with results
-            document.querySelectorAll('.klasse-section').forEach(section => {
-                const hasVisibleCards = Array.from(section.querySelectorAll('.konto-card'))
-                    .some(card => card.style.display !== 'none');
-                if (hasVisibleCards && searchValue) {
-                    section.classList.add('active');
-                }
-            });
-        }
-
-        function filterByKlasse() {
-            filterKonten();
-        }
-
-        function exportKontenplan() {
-            const konten = [];
-            const sections = document.querySelectorAll('.klasse-section');
-            
-            sections.forEach(section => {
-                const klasse = section.getAttribute('data-klasse');
-                const cards = section.querySelectorAll('.konto-card');
-                
-                cards.forEach(card => {
-                    const nummer = card.querySelector('.konto-nummer').textContent;
-                    const bezeichnung = card.querySelector('.konto-bezeichnung').textContent.replace(/GWG/, '').trim();
-                    konten.push(`${nummer}\t${bezeichnung}\tKlasse ${klasse}`);
+        // Smooth scrolling for navigation
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 });
             });
-            
-            const header = "Kontonummer\tBezeichnung\tKlasse\n";
-            const content = header + konten.join('\n');
-            
-            const blob = new Blob([content], { type: 'text/tab-separated-values;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'gardenkeeper_datev_kontenplan.tsv';
-            link.click();
         }
 
-        function printKontenplan() {
-            window.print();
+        // Add sparkle effect on card hover
+        function addSparkleEffect() {
+            document.querySelectorAll('.feature-card, .friendly-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const sparkle = document.createElement('div');
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.position = 'absolute';
+                    sparkle.style.top = '10px';
+                    sparkle.style.right = '10px';
+                    sparkle.style.fontSize = '1.5rem';
+                    sparkle.style.animation = 'sparkle 0.8s ease-out forwards';
+                    sparkle.style.pointerEvents = 'none';
+                    this.appendChild(sparkle);
+
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 800);
+                });
+            });
         }
 
-        function copyAllKonten() {
-            const konten = [];
-            document.querySelectorAll('.konto-card').forEach(card => {
-                if (card.style.display !== 'none') {
-                    const nummer = card.querySelector('.konto-nummer').textContent;
-                    const bezeichnung = card.querySelector('.konto-bezeichnung').textContent;
-                    konten.push(`${nummer}\t${bezeichnung}`);
+        // Add CSS for sparkle animation
+        function addSparkleCSS() {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes sparkle {
+                    0% {
+                        transform: scale(0) rotate(0deg);
+                        opacity: 0;
+                    }
+                    50% {
+                        transform: scale(1.2) rotate(180deg);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: scale(0) rotate(360deg);
+                        opacity: 0;
+                    }
                 }
-            });
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            setupScrollAnimations();
+            setupSmoothScrolling();
+            addSparkleEffect();
+            addSparkleCSS();
+
+            // Add welcome message
+            setTimeout(() => {
+                console.log('🌱 gardenKeeper® Team-Anleitung geladen! Viel Erfolg, liebes Team! 💚');
+            }, 2000);
+        });
+
+        // Add dynamic title animation
+        function animateTitle() {
+            const title = document.querySelector('.hero h1');
+            const text = 'gardenKeeper®';
+            title.innerHTML = '';
             
-            navigator.clipboard.writeText(konten.join('\n')).then(() => {
-                alert('Kontenplan wurde in die Zwischenablage kopiert!');
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.animationDelay = `${index * 0.1}s`;
+                span.style.display = 'inline-block';
+                span.style.animation = 'letterPop 0.6s ease-out forwards';
+                title.appendChild(span);
             });
         }
+
+        // Add letter animation CSS
+        const letterStyle = document.createElement('style');
+        letterStyle.textContent = `
+            @keyframes letterPop {
+                0% {
+                    transform: translateY(50px) rotateX(90deg);
+                    opacity: 0;
+                }
+                50% {
+                    transform: translateY(-10px) rotateX(0deg);
+                }
+                100% {
+                    transform: translateY(0) rotateX(0deg);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(letterStyle);
+
+        // Trigger title animation after loading
+        setTimeout(animateTitle, 1500);
+
+        // Add team celebration when scrolling to bottom
+        let celebrationTriggered = false;
+        window.addEventListener('scroll', () => {
+            if (!celebrationTriggered && window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+                celebrationTriggered = true;
+                
+                // Create celebration confetti
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.innerHTML = ['🎉', '🌱', '✨', '💚', '🚀'][Math.floor(Math.random() * 5)];
+                        confetti.style.position = 'fixed';
+                        confetti.style.left = Math.random() * 100 + 'vw';
+                        confetti.style.top = '-50px';
+                        confetti.style.fontSize = '2rem';
+                        confetti.style.pointerEvents = 'none';
+                        confetti.style.zIndex = '9999';
+                        confetti.style.animation = 'confettiFall 3s ease-out forwards';
+                        
+                        document.body.appendChild(confetti);
+                        
+                        setTimeout(() => {
+                            confetti.remove();
+                        }, 3000);
+                    }, i * 100);
+                }
+            }
+        });
+
+        // Add confetti animation
+        const confettiStyle = document.createElement('style');
+        confettiStyle.textContent = `
+            @keyframes confettiFall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(confettiStyle);
     </script>
 </body>
 </html>
